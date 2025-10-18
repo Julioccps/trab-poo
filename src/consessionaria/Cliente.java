@@ -1,6 +1,6 @@
 package consessionaria;
 
-public class Cliente extends Pessoa{
+public abstract class Cliente extends Pessoa{
     private int telefone;
     private String email;
     private int rg;
@@ -13,6 +13,15 @@ public class Cliente extends Pessoa{
         this.rg = rg;
         this.cpf = cpf;
     }
+    @Override
+    public String getNome(){
+        return nome;
+    }
+    @Override
+    public void setNome(String nome){
+        this.nome = nome;
+    }
+    
 
     public int getTelefone() {
         return telefone;

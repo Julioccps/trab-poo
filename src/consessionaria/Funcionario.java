@@ -1,6 +1,6 @@
 package consessionaria;
 
-public class Funcionario extends Pessoa{
+public abstract class Funcionario extends Pessoa{
     private int num_matricula;
     private String qualificacao;
     private String descricao_qualificacao;
@@ -15,6 +15,14 @@ public class Funcionario extends Pessoa{
         this.carga_horaria_semanal = carga_horaria_semanal;  
     }
 
+    @Override
+    public String getNome(){
+        return nome;
+    }
+    @Override
+    public void setNome(String nome){
+        this.nome = nome;
+    }
     public int getNum_matricula() {
         return num_matricula;
     }

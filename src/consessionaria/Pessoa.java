@@ -1,13 +1,13 @@
 package consessionaria;
 
-public class Pessoa { // MUDAR NOME
+public abstract class Pessoa implements Nomeavel{ // MUDAR NOME
     protected String nome;
     
     public Pessoa(){
         super();
         
     }
-    
+    @Override
     public String getNome(){
         return nome;
     }
@@ -23,11 +23,11 @@ public class Pessoa { // MUDAR NOME
         System.out.println("Nome: " + nome);
     }
     
-    public void alterar(String novo_nome){
+    public void alterar(String novo_nome){ // REFATORAR
         nome = novo_nome;
     }
     
-    public void remover(){
+    public void remover(){ // REFATORAR
         nome = "";
     }
 }

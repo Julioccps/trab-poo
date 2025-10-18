@@ -1,12 +1,21 @@
 package consessionaria;
 
-public class Veiculo extends Pessoa{ // MUDAR PARA OUTRO NOME, SEM SER PESSOA
+public abstract class Veiculo implements Nomeavel{ // MUDAR PARA OUTRO NOME, SEM SER PESSOA
+    private String nome;
     private String cor;
     private int num_marchas;
     private int num_portas;
     private String marca;
     private int ano;
-
+    
+    @Override
+    public String getNome(){
+        return nome;
+    }
+    public void setNome(String nome){
+        this.nome = nome;
+    }
+    
     public Veiculo(int num_marchas, int num_portas, String marca, int ano){
         super();
         this.num_marchas = num_marchas;
