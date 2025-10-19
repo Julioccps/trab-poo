@@ -13,6 +13,31 @@ public abstract class Cliente extends Pessoa{
         this.rg = rg;
         this.cpf = cpf;
     }
+    public void cadastrar(String nome, int telefone, String email, 
+            int rg, String cpf) {
+        this.nome = nome;
+        this.telefone = telefone;
+        this.email = email;
+        this.rg = rg;
+        this.cpf = cpf;
+    }
+
+    @Override
+    public void consultar() {
+        System.out.println("Nome: " + nome + ", Telefone: " + telefone + ", Email: " + email 
+                + ", RG: " + rg + ", CPF: " + cpf);
+    }
+    public void alterar(String novo_nome, int novo_telefone, String novo_email,
+            int novo_rg, String novo_cpf) {
+        nome = novo_nome;
+        telefone = novo_telefone;
+        email = novo_email;
+        rg = novo_rg;
+        cpf = novo_cpf;
+    }
+    public void remover() {
+        
+    }
     @Override
     public String getNome(){
         return nome;
@@ -54,5 +79,4 @@ public abstract class Cliente extends Pessoa{
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-    
 }
