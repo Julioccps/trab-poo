@@ -1,4 +1,4 @@
-package consessionaria;
+package concessionaria;
 
 public abstract class Pessoa implements Nomeavel{ // MUDAR NOME
     protected String nome;

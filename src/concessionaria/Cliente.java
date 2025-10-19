@@ -1,4 +1,4 @@
-package consessionaria;
+package concessionaria;
 
 public abstract class Cliente extends Pessoa{
     private int telefone;

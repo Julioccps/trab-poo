@@ -1,4 +1,4 @@
-package consessionaria;
+package concessionaria;
 
 public interface Nomeavel {
     String getNome();

@@ -1,4 +1,4 @@
-package consessionaria;
+package concessionaria;
 
 public class Venda {
     private String data;

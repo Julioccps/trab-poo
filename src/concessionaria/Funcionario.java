@@ -1,4 +1,4 @@
-package consessionaria;
+package concessionaria;
 
 public abstract class Funcionario extends Pessoa{
     private int num_matricula;

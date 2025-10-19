@@ -1,4 +1,4 @@
-package consessionaria;
+package concessionaria;
 
 public abstract class Veiculo implements Nomeavel{ // MUDAR PARA OUTRO NOME, SEM SER PESSOA
     private String nome;
