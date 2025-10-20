@@ -1,20 +1,19 @@
 package concessionaria;
 
-public abstract class Cliente extends Pessoa{
+public class Cliente extends Pessoa{
     private int telefone;
     private String email;
     private int rg;
     private String cpf;
     
-    public Cliente(int telefone, String email, int rg, String cpf){
-        super();
+    public Cliente(String nome, int telefone, String email, int rg, String cpf){
+        super(nome);
         this.telefone = telefone;
         this.email = email;
         this.rg = rg;
         this.cpf = cpf;
     }
-    public void cadastrar(String nome, int telefone, String email, 
-            int rg, String cpf) {
+    public void cadastrar(String nome, int telefone, String email, int rg, String cpf) {
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;

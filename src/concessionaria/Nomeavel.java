@@ -1,6 +1,6 @@
 package concessionaria;
 
 public interface Nomeavel {
-    String getNome();
-    void setNome();
+    public abstract String getNome();
+    public abstract void setNome(String nome);
 }

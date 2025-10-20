@@ -1,14 +1,14 @@
 package concessionaria;
 
-public abstract class Funcionario extends Pessoa{
+public class Funcionario extends Pessoa{
     private int num_matricula;
     private String qualificacao;
     private String descricao_qualificacao;
     private float carga_horaria_semanal;
     
-    public Funcionario(int num_matricula, String qualificacao,
+    public Funcionario(String nome, int num_matricula, String qualificacao,
             String descricao_qualificacao, float carga_horaria_semanal){
-        super();
+        super(nome);
         this.num_matricula = num_matricula;
         this.qualificacao = qualificacao;
         this.descricao_qualificacao = descricao_qualificacao;
