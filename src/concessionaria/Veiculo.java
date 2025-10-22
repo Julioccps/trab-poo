@@ -1,6 +1,6 @@
 package concessionaria;
 
-public abstract class Veiculo implements Nomeavel{ // MUDAR PARA OUTRO NOME, SEM SER PESSOA
+public class Veiculo implements Nomeavel{ // MUDAR PARA OUTRO NOME, SEM SER PESSOA
     private String nome;
     private String cor;
     private int num_marchas;
@@ -8,8 +8,7 @@ public abstract class Veiculo implements Nomeavel{ // MUDAR PARA OUTRO NOME, SEM
     private String marca;
     private int ano;
     
-    public void cadastrar(String nome, String cor, int num_marchas,
-            int num_portas, String marca, int ano) {
+    public Veiculo(String nome, String cor, int num_marchas, int num_portas, String marca, int ano){
         this.nome = nome;
         this.cor = cor;
         this.num_marchas = num_marchas;
