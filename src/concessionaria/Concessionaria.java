@@ -31,23 +31,31 @@ public class Concessionaria {
             switch(opt) {
                 case 1: {
                     menuCliente(leitura, clientes);
+                    break;
                 }
                 case 2: {
                     menuFuncionario(leitura, funcionarios);
+                    break;
                 }
                 case 3: {
                     menuVeiculo(leitura, veiculos);
+                    break;
                 }
                 case 4: {
                     menuVenda(leitura, vendas, clientes, funcionarios, veiculos);
+                    break;
                 }
                 case 5: {
                     //Menu_Relatorio();
+                    break;
                 }
                 case 0: {
                     System.out.println("Finalizando o programa!");
+                    break;
                 }
-
+                default: {
+                    System.out.println("Opcao invalida! Tente de novo!");
+                }
             }
         }   
     }
@@ -80,7 +88,8 @@ public class Concessionaria {
                     String cpf = leitura.nextLine();
                     clientes.add(new Cliente(nome, tel, email, rg, cpf));
                     System.out.println("Cliente adicionado com sucesso");
-                    opt = -1; 
+                    opt = -1;
+                    break;
                 }
                 case 2: {
                     System.out.println("|---------- Clientes ------------|");
@@ -92,6 +101,7 @@ public class Concessionaria {
                     leitura.nextLine(); 
                     clientes.get(opt).consultar();
                     opt = -1;
+                    break;
                 }
                 case 3: {
                     System.out.println("|---------- Clientes ------------|");
@@ -118,6 +128,7 @@ public class Concessionaria {
                     clientes.get(opt).alterar(nome, tel, email, rg, cpf);
                     System.out.println("Cliente alterado com sucesso");
                     opt = -1;
+                    break;
                 }
                 case 4: {
                     System.out.println("|---------- Clientes ------------|");
@@ -131,9 +142,11 @@ public class Concessionaria {
                     Cliente removido = clientes.remove(opt);
                     System.out.println("Cliente " + removido.getNome() + " removido com sucesso.");
                     opt = -1;
+                    break;
                 }
                 case 0: {
                     System.out.println("Voltando ao menu principal");
+                    break;
                 }
                 default: { 
                     System.out.println("Opção inválida!");
