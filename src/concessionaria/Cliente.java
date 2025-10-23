@@ -1,19 +1,19 @@
 package concessionaria;
 
 public class Cliente extends Pessoa{
-    private int telefone;
+    private String telefone;
     private String email;
     private int rg;
     private String cpf;
     
-    public Cliente(String nome, int telefone, String email, int rg, String cpf){
+    public Cliente(String nome, String telefone, String email, int rg, String cpf){
         super(nome);
         this.telefone = telefone;
         this.email = email;
         this.rg = rg;
         this.cpf = cpf;
     }
-    public void cadastrar(String nome, int telefone, String email, int rg, String cpf) {
+    public void cadastrar(String nome, String telefone, String email, int rg, String cpf) {
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
@@ -26,7 +26,7 @@ public class Cliente extends Pessoa{
         System.out.println("Nome: " + nome + ", Telefone: " + telefone + ", Email: " + email 
                 + ", RG: " + rg + ", CPF: " + cpf);
     }
-    public void alterar(String novo_nome, int novo_telefone, String novo_email,
+    public void alterar(String novo_nome, String novo_telefone, String novo_email,
             int novo_rg, String novo_cpf) {
         nome = novo_nome;
         telefone = novo_telefone;
@@ -47,11 +47,11 @@ public class Cliente extends Pessoa{
     }
     
 
-    public int getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
