@@ -46,7 +46,7 @@ public class Concessionaria {
                     break;
                 }
                 case 5: {
-                    //Menu_Relatorio();
+                    menuRelatorio(leitura, clientes, funcionarios, vendas, veiculos);
                     break;
                 }
                 case 0: {
@@ -69,7 +69,6 @@ public class Concessionaria {
             System.out.println("|--- 3 Alterar cliente ----------|");
             System.out.println("|--- 4 Remover cliente ----------|");
             System.out.println("|--- 0 Voltar ao menu principal -|");
-            System.out.print("Escolha uma das opcoes: ");
             opt = leitura.nextInt();
             leitura.nextLine(); 
             switch (opt) {
@@ -77,8 +76,7 @@ public class Concessionaria {
                     System.out.print("Nome do cliente: ");
                     String nome = leitura.nextLine();
                     System.out.print("Telefone do cliente: ");
-                    int tel = leitura.nextInt();
-                    leitura.nextLine(); 
+                    String tel = leitura.nextLine(); 
                     System.out.print("Email do cliente: ");
                     String email = leitura.nextLine();
                     System.out.print("RG do cliente: ");
@@ -88,8 +86,8 @@ public class Concessionaria {
                     String cpf = leitura.nextLine();
                     clientes.add(new Cliente(nome, tel, email, rg, cpf));
                     System.out.println("Cliente adicionado com sucesso");
-                    opt = -1;
-                    break;
+                    opt = -1; 
+                    break; 
                 }
                 case 2: {
                     System.out.println("|---------- Clientes ------------|");
@@ -101,7 +99,7 @@ public class Concessionaria {
                     leitura.nextLine(); 
                     clientes.get(opt).consultar();
                     opt = -1;
-                    break;
+                    break; 
                 }
                 case 3: {
                     System.out.println("|---------- Clientes ------------|");
@@ -115,8 +113,7 @@ public class Concessionaria {
                     System.out.print("Novo nome do cliente: ");
                     String nome = leitura.nextLine();
                     System.out.print("Novo telefone do cliente: ");
-                    int tel = leitura.nextInt();
-                    leitura.nextLine(); 
+                    String tel = leitura.nextLine(); 
                     System.out.print("Novo email do cliente: ");
                     String email = leitura.nextLine();
                     System.out.print("Novo RG do cliente: ");
@@ -127,8 +124,8 @@ public class Concessionaria {
                     
                     clientes.get(opt).alterar(nome, tel, email, rg, cpf);
                     System.out.println("Cliente alterado com sucesso");
-                    opt = -1;
-                    break;
+                    opt = -1; 
+                    break; 
                 }
                 case 4: {
                     System.out.println("|---------- Clientes ------------|");
@@ -141,16 +138,17 @@ public class Concessionaria {
                     
                     Cliente removido = clientes.remove(opt);
                     System.out.println("Cliente " + removido.getNome() + " removido com sucesso.");
-                    opt = -1;
-                    break;
+                    opt = -1; 
+                    break; 
                 }
                 case 0: {
                     System.out.println("Voltando ao menu principal");
-                    break;
+                    break; 
                 }
                 default: { 
                     System.out.println("Opção inválida!");
                     opt = -1;
+                    break;
                 }
             }
         }
@@ -166,7 +164,6 @@ public class Concessionaria {
             System.out.println("|--- 3 Alterar Funcionario ----------|");
             System.out.println("|--- 4 Remover Funcionario ----------|");
             System.out.println("|--- 0 Voltar ao menu principal -----|");
-            System.out.print("Escolha uma das opcoes: ");
             opt = leitura.nextInt();
             leitura.nextLine(); 
             switch (opt) {
@@ -266,7 +263,6 @@ public class Concessionaria {
             System.out.println("|--- 3 Alterar Veiculo ----------|");
             System.out.println("|--- 4 Remover Veiculo ----------|");
             System.out.println("|--- 0 Voltar ao menu principal -|");
-            System.out.print("Escolha uma das opcoes: ");
             opt = leitura.nextInt();
             leitura.nextLine(); 
             switch (opt) {
@@ -372,7 +368,6 @@ public class Concessionaria {
             System.out.println("|--- 3 Alterar Venda ----------|");
             System.out.println("|--- 4 Remover Venda ----------|");
             System.out.println("|--- 0 Voltar ao menu principal -|");
-            System.out.print("Escolha uma das opcoes: ");
             opt = leitura.nextInt();
             leitura.nextLine(); 
             switch (opt) {
@@ -499,6 +494,61 @@ public class Concessionaria {
                 }
                 case 0: {
                     System.out.println("Voltando ao menu principal");
+                    break;
+                }
+                default: {
+                    System.out.println("Opção inválida!");
+                    opt = -1;
+                    break;
+                }
+            }
+        }
+    }
+    
+    public static void menuRelatorio(Scanner leitura, ArrayList<Cliente> clientes, ArrayList<Funcionario> funcionarios,
+        ArrayList<Venda> vendas, ArrayList<Veiculo> veiculos){
+        int opt = leitura.nextInt();
+        while (opt != 0){
+            System.out.println("|------Menu Relatorios---------|");
+            System.out.println("| 1 Relatorio de clientes -----|");
+            System.out.println("| 2 Relatorio de funcionarios -|");
+            System.out.println("| 3 Relatorio de veiculos -----|");
+            System.out.println("| 4 Relatorio de vendas  ------|");
+            System.out.println("| 0 voltar ao menu principal --|");
+
+            leitura.nextLine();
+
+            switch (opt){
+                case 1:{
+                    System.out.println("|---------- Clientes ------------|");
+                    for (int i = 0; i < clientes.size(); i++){
+                            clientes.get(i).consultar();
+                    }
+                    break;
+                }
+                case 2:{
+                    System.out.println("|---------- Funcionarios ------------|");
+                    for (int i = 0; i < funcionarios.size(); i++){
+                            funcionarios.get(i).consultar();
+                    }
+                    break;
+                }
+                case 3:{
+                    System.out.println("|---------- Veiculos ------------|");
+                    for (int i = 0; i < funcionarios.size(); i++){
+                            veiculos.get(i).consultar();
+                    }
+                    break;
+                }
+                case 4:{
+                    System.out.println("|---------- Vendas ------------|");
+                    for (int i = 0; i < funcionarios.size(); i++){
+                            vendas.get(i).consultar();
+                    }
+                    break;
+                }
+                case 0:{
+                    System.out.println("Voltando ao menu principal!");
                     break;
                 }
                 default: {
