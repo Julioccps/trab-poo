@@ -1,4 +1,4 @@
-package concessionaria;
+package concessionaria.Model;
 
 public class Cliente extends Pessoa{
     private String telefone;

@@ -1,4 +1,4 @@
-package concessionaria;
+package concessionaria.Model;
 
 public class Funcionario extends Pessoa{
     private int num_matricula;

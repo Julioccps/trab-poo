@@ -1,4 +1,4 @@
-package concessionaria;
+package concessionaria.Model;
 
 public class Veiculo implements Nomeavel{ // MUDAR PARA OUTRO NOME, SEM SER PESSOA
     private String nome;

@@ -1,4 +1,4 @@
-package concessionaria;
+package concessionaria.Model;
 
 public interface Nomeavel {
     public abstract String getNome();

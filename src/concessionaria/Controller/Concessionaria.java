@@ -1,5 +1,9 @@
-package concessionaria;
+package concessionaria.Controller;
 
+import concessionaria.Model.Venda;
+import concessionaria.Model.Veiculo;
+import concessionaria.Model.Funcionario;
+import concessionaria.Model.Cliente;
 import java.util.ArrayList;
 import java.util.Scanner;
 

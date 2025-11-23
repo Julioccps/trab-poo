@@ -1,4 +1,4 @@
-package concessionaria;
+package concessionaria.Model;
 
 public class Pessoa implements Nomeavel{ 
     protected String nome;
