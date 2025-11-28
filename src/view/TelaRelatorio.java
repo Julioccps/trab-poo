@@ -5,6 +5,7 @@
 package view;
 
 import controller.Concessionaria;
+import javax.swing.JFrame;
 
 /**
  *
@@ -17,6 +18,8 @@ public class TelaRelatorio extends javax.swing.JFrame {
      */
     public TelaRelatorio(Concessionaria concessionaria) {
         initComponents();
+        setTitle("Menu Relatorio");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**

@@ -4,6 +4,8 @@
  */
 package view;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Guilherme
@@ -15,6 +17,7 @@ public class TelaRelatorioFuncionario extends javax.swing.JFrame {
      */
     public TelaRelatorioFuncionario() {
         initComponents();
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**

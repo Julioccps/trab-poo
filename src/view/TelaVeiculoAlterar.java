@@ -4,6 +4,8 @@
  */
 package view;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Guilherme
@@ -15,6 +17,7 @@ public class TelaVeiculoAlterar extends javax.swing.JFrame {
      */
     public TelaVeiculoAlterar() {
         initComponents();
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**

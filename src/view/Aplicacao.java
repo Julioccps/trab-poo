@@ -32,6 +32,7 @@ public class Aplicacao extends javax.swing.JFrame {
         this.telaveiculo = new TelaVeiculo(this.concessionaria);
         this.telavenda = new TelaVenda(this.concessionaria);
         this.telarelatorio = new TelaRelatorio(this.concessionaria);
+        setTitle("Gerenciamento Concessionaria");
     }
 
     /**
@@ -80,7 +81,7 @@ public class Aplicacao extends javax.swing.JFrame {
         jButtonGVen.setText("Gerenciamento de Venda");
         jButtonGVen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GerencimentoVeiculoButtonActionPerformed(evt);
+                GerencimentoVendaButtonActionPerformed(evt);
             }
         });
 
@@ -92,6 +93,11 @@ public class Aplicacao extends javax.swing.JFrame {
         });
 
         jButton6.setText("Sair do Programa");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,24 +143,28 @@ public class Aplicacao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void GerenciamentoClienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GerenciamentoClienteButtonActionPerformed
-        this.jButtonGC.setVisible(true);
+        this.telacliente.setVisible(true);
     }//GEN-LAST:event_GerenciamentoClienteButtonActionPerformed
 
     private void GerenciamentoFuncionarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GerenciamentoFuncionarioButtonActionPerformed
-        this.jButtonGF.setVisible(true);
+        this.telafuncionario.setVisible(true);
     }//GEN-LAST:event_GerenciamentoFuncionarioButtonActionPerformed
 
     private void GerenciamentoVeiculoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GerenciamentoVeiculoButtonActionPerformed
-        this.jButtonGVei.setVisible(true);
+        this.telaveiculo.setVisible(true);
     }//GEN-LAST:event_GerenciamentoVeiculoButtonActionPerformed
 
-    private void GerencimentoVeiculoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GerencimentoVeiculoButtonActionPerformed
-        this.jButtonGVen.setVisible(true);
-    }//GEN-LAST:event_GerencimentoVeiculoButtonActionPerformed
+    private void GerencimentoVendaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GerencimentoVendaButtonActionPerformed
+        this.telavenda.setVisible(true);
+    }//GEN-LAST:event_GerencimentoVendaButtonActionPerformed
 
     private void GerencimentoRelatorioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GerencimentoRelatorioButtonActionPerformed
-        this.jButtonGR.setVisible(true);
+        this.telarelatorio.setVisible(true);
     }//GEN-LAST:event_GerencimentoRelatorioButtonActionPerformed
+
+    private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_ExitButtonActionPerformed
 
     /**
      * @param args the command line arguments

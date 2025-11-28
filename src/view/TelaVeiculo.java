@@ -5,6 +5,7 @@
 package view;
 
 import controller.Concessionaria;
+import javax.swing.JFrame;
 
 /**
  *
@@ -17,6 +18,8 @@ public class TelaVeiculo extends javax.swing.JFrame {
      */
     public TelaVeiculo(Concessionaria concessionaria) {
         initComponents();
+        setTitle("Menu Veiculo");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**

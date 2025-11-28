@@ -5,6 +5,7 @@
 package view;
 
 import controller.Concessionaria;
+import javax.swing.JFrame;
 
 /**
  *
@@ -17,6 +18,8 @@ public class TelaFuncionario extends javax.swing.JFrame {
      */
     public TelaFuncionario(Concessionaria concessionaria) {
         initComponents();
+        setTitle("Menu Funcionario");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**

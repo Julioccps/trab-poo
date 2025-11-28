@@ -103,7 +103,7 @@
         <Property name="text" type="java.lang.String" value="Gerenciamento de Venda"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GerencimentoVeiculoButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GerencimentoVendaButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonGR">
@@ -118,6 +118,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Sair do Programa"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ExitButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

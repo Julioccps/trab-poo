@@ -5,6 +5,7 @@
 package view;
 
 import controller.Concessionaria;
+import javax.swing.JFrame;
 
 /**
  *
@@ -21,7 +22,8 @@ public class TelaCliente extends javax.swing.JFrame {
     public TelaCliente(Concessionaria controller) {
         initComponents();
         this.concessionaria = controller;
-        
+        setTitle("Menu Clientes");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
 

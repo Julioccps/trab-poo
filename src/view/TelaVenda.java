@@ -5,6 +5,7 @@
 package view;
 
 import controller.Concessionaria;
+import javax.swing.JFrame;
 
 /**
  *
@@ -17,6 +18,8 @@ public class TelaVenda extends javax.swing.JFrame {
      */
     public TelaVenda(Concessionaria concessionaria) {
         initComponents();
+        setTitle("Menu Venda");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**
