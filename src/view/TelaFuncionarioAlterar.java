@@ -4,6 +4,7 @@
  */
 package view;
 
+import controller.Concessionaria;
 import javax.swing.JFrame;
 
 /**
@@ -15,7 +16,7 @@ public class TelaFuncionarioAlterar extends javax.swing.JFrame {
     /**
      * Creates new form Funcionario
      */
-    public TelaFuncionarioAlterar() {
+    public TelaFuncionarioAlterar(Concessionaria concessionaria) {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
@@ -41,7 +42,6 @@ public class TelaFuncionarioAlterar extends javax.swing.JFrame {
         jLabel46 = new javax.swing.JLabel();
         jTextField28 = new javax.swing.JTextField();
         jButton44 = new javax.swing.JButton();
-        jButton45 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,8 +75,6 @@ public class TelaFuncionarioAlterar extends javax.swing.JFrame {
             }
         });
 
-        jButton45.setText("Sair sem salvar");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -102,9 +100,7 @@ public class TelaFuncionarioAlterar extends javax.swing.JFrame {
                                 .addComponent(jTextField25)
                                 .addComponent(jTextField24)
                                 .addComponent(jTextField28, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jButton44, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton45, javax.swing.GroupLayout.Alignment.LEADING)))))
+                            .addComponent(jButton44, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(101, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -134,9 +130,7 @@ public class TelaFuncionarioAlterar extends javax.swing.JFrame {
                     .addComponent(jTextField28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton44)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton45)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         pack();
@@ -152,7 +146,6 @@ public class TelaFuncionarioAlterar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton44;
-    private javax.swing.JButton jButton45;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;

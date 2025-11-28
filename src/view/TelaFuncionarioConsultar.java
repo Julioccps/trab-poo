@@ -4,6 +4,7 @@
  */
 package view;
 
+import controller.Concessionaria;
 import javax.swing.JFrame;
 
 /**
@@ -15,7 +16,7 @@ public class TelaFuncionarioConsultar extends javax.swing.JFrame {
     /**
      * Creates new form Funcionario
      */
-    public TelaFuncionarioConsultar() {
+    public TelaFuncionarioConsultar(Concessionaria concessionaria) {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }

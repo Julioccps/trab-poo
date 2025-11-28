@@ -4,6 +4,7 @@
  */
 package view;
 
+import controller.Concessionaria;
 import javax.swing.JFrame;
 
 /**
@@ -15,7 +16,7 @@ public class TelaFuncionarioCadastrar extends javax.swing.JFrame {
     /**
      * Creates new form Funcionario
      */
-    public TelaFuncionarioCadastrar() {
+    public TelaFuncionarioCadastrar(Concessionaria concessionaria) {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
@@ -41,7 +42,6 @@ public class TelaFuncionarioCadastrar extends javax.swing.JFrame {
         jTextField9 = new javax.swing.JTextField();
         jTextField10 = new javax.swing.JTextField();
         jButton34 = new javax.swing.JButton();
-        jButton35 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,8 +76,6 @@ public class TelaFuncionarioCadastrar extends javax.swing.JFrame {
             }
         });
 
-        jButton35.setText("Sair sem salvar");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -103,9 +101,7 @@ public class TelaFuncionarioCadastrar extends javax.swing.JFrame {
                                 .addComponent(jTextField6)
                                 .addComponent(jTextField9)
                                 .addComponent(jTextField10))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jButton34, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton35, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addComponent(jButton34, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(45, 101, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -135,9 +131,7 @@ public class TelaFuncionarioCadastrar extends javax.swing.JFrame {
                     .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton34)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton35)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         pack();
@@ -153,7 +147,6 @@ public class TelaFuncionarioCadastrar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton34;
-    private javax.swing.JButton jButton35;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;

@@ -13,11 +13,22 @@ import javax.swing.JFrame;
  */
 public class TelaVeiculo extends javax.swing.JFrame {
 
+    private final Concessionaria concessionaria;
+    private final TelaVeiculoCadastrar veiculocadastrar;
+    private final TelaVeiculoConsultar veiculoconsultar;
+    private final TelaVeiculoAlterar veiculoalterar;
+    private final TelaVeiculoRemover veiculoremover;
+
     /**
      * Creates new form Veiculo
      */
     public TelaVeiculo(Concessionaria concessionaria) {
         initComponents();
+        this.concessionaria = concessionaria;
+        this.veiculocadastrar = new TelaVeiculoCadastrar(this.concessionaria);
+        this.veiculoconsultar = new TelaVeiculoConsultar(this.concessionaria);
+        this.veiculoalterar = new TelaVeiculoAlterar(this.concessionaria);
+        this.veiculoremover = new TelaVeiculoRemover(this.concessionaria);
         setTitle("Menu Veiculo");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
@@ -36,7 +47,6 @@ public class TelaVeiculo extends javax.swing.JFrame {
         jButton18 = new javax.swing.JButton();
         jButton19 = new javax.swing.JButton();
         jButton20 = new javax.swing.JButton();
-        jButton21 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,14 +54,32 @@ public class TelaVeiculo extends javax.swing.JFrame {
         jLabel5.setText("Menu Veiculos");
 
         jButton17.setText("Cadastrar Veiculo");
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CadastrarVeiculoButtonActionPerformed(evt);
+            }
+        });
 
         jButton18.setText("Consultar Veiculo");
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConsultarVeiculoButtonActionPerformed(evt);
+            }
+        });
 
         jButton19.setText("Alterar Veiculo");
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AlterarVeiculoButtonActionPerformed(evt);
+            }
+        });
 
         jButton20.setText("Remover Veiculo");
-
-        jButton21.setText("Voltar ao menu principal");
+        jButton20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoverVeiculoButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -66,10 +94,9 @@ public class TelaVeiculo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
                         .addComponent(jButton19, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton20, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton21, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton20, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(103, 103, 103))
         );
         layout.setVerticalGroup(
@@ -85,20 +112,33 @@ public class TelaVeiculo extends javax.swing.JFrame {
                 .addComponent(jButton19)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton20)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton21)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void CadastrarVeiculoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarVeiculoButtonActionPerformed
+        this.veiculocadastrar.setVisible(true);
+    }//GEN-LAST:event_CadastrarVeiculoButtonActionPerformed
+
+    private void ConsultarVeiculoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarVeiculoButtonActionPerformed
+        this.veiculoconsultar.setVisible(true);
+    }//GEN-LAST:event_ConsultarVeiculoButtonActionPerformed
+
+    private void AlterarVeiculoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarVeiculoButtonActionPerformed
+        this.veiculoalterar.setVisible(true);
+    }//GEN-LAST:event_AlterarVeiculoButtonActionPerformed
+
+    private void RemoverVeiculoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverVeiculoButtonActionPerformed
+        this.veiculoremover.setVisible(true);
+    }//GEN-LAST:event_RemoverVeiculoButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton20;
-    private javax.swing.JButton jButton21;
     private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 }

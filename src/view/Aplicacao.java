@@ -163,6 +163,7 @@ public class Aplicacao extends javax.swing.JFrame {
     }//GEN-LAST:event_GerencimentoRelatorioButtonActionPerformed
 
     private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
+        System.out.println("Encerrando o programa!");
         System.exit(0);
     }//GEN-LAST:event_ExitButtonActionPerformed
 

@@ -13,11 +13,23 @@ import javax.swing.JFrame;
  */
 public class TelaFuncionario extends javax.swing.JFrame {
 
+    private final Concessionaria concessionaria;
+    private final TelaFuncionarioCadastrar funcionariocadastrar;
+    private final TelaFuncionarioConsultar funcionarioconsultar;
+    private final TelaFuncionarioAlterar funcionarioalterar;
+    private final TelaFuncionarioRemover funcionarioremover;
+
     /**
      * Creates new form Funcionario
+     * @param concessionaria
      */
     public TelaFuncionario(Concessionaria concessionaria) {
         initComponents();
+        this.concessionaria = concessionaria;
+        this.funcionariocadastrar = new TelaFuncionarioCadastrar(this.concessionaria);
+        this.funcionarioconsultar = new TelaFuncionarioConsultar(this.concessionaria);
+        this.funcionarioalterar = new TelaFuncionarioAlterar(this.concessionaria);
+        this.funcionarioremover = new TelaFuncionarioRemover(this.concessionaria);
         setTitle("Menu Funcionario");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
@@ -36,7 +48,6 @@ public class TelaFuncionario extends javax.swing.JFrame {
         jButton13 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
         jButton15 = new javax.swing.JButton();
-        jButton16 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,14 +55,32 @@ public class TelaFuncionario extends javax.swing.JFrame {
         jLabel4.setText("Menu Funcionarios");
 
         jButton12.setText("Cadastrar Funcionario");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CadastrarFuncionarioButtonActionPerformed(evt);
+            }
+        });
 
         jButton13.setText("Consultar Funcionario");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConsultarFuncionarioButtonActionPerformed(evt);
+            }
+        });
 
         jButton14.setText("Alterar Funcionario");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AlterarFuncionarioButtonActionPerformed(evt);
+            }
+        });
 
         jButton15.setText("Remover Funcionario");
-
-        jButton16.setText("Voltar ao menu principal");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoverFuncionarioButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -61,8 +90,7 @@ public class TelaFuncionario extends javax.swing.JFrame {
                 .addGap(123, 123, 123)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton16)
-                    .addComponent(jButton13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton13, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                     .addComponent(jButton14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(117, Short.MAX_VALUE))
@@ -84,20 +112,33 @@ public class TelaFuncionario extends javax.swing.JFrame {
                 .addComponent(jButton14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton16)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void CadastrarFuncionarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarFuncionarioButtonActionPerformed
+        this.funcionariocadastrar.setVisible(true);
+    }//GEN-LAST:event_CadastrarFuncionarioButtonActionPerformed
+
+    private void ConsultarFuncionarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarFuncionarioButtonActionPerformed
+        this.funcionarioconsultar.setVisible(true);
+    }//GEN-LAST:event_ConsultarFuncionarioButtonActionPerformed
+
+    private void AlterarFuncionarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarFuncionarioButtonActionPerformed
+        this.funcionarioalterar.setVisible(true);
+    }//GEN-LAST:event_AlterarFuncionarioButtonActionPerformed
+
+    private void RemoverFuncionarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverFuncionarioButtonActionPerformed
+        this.funcionarioremover.setVisible(true);
+    }//GEN-LAST:event_RemoverFuncionarioButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton16;
     private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }

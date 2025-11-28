@@ -4,6 +4,7 @@
  */
 package view;
 
+import controller.Concessionaria;
 import javax.swing.JFrame;
 
 /**
@@ -15,7 +16,7 @@ public class TelaVendaRemover extends javax.swing.JFrame {
     /**
      * Creates new form Venda
      */
-    public TelaVendaRemover() {
+    public TelaVendaRemover(Concessionaria concessionaria) {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
@@ -33,7 +34,6 @@ public class TelaVendaRemover extends javax.swing.JFrame {
         jList8 = new javax.swing.JList<>();
         jLabel64 = new javax.swing.JLabel();
         jButton42 = new javax.swing.JButton();
-        jButton43 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,8 +47,6 @@ public class TelaVendaRemover extends javax.swing.JFrame {
         jLabel64.setText("Remover venda");
 
         jButton42.setText("Salvar e sair");
-
-        jButton43.setText("Sair sem salvar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -64,9 +62,7 @@ public class TelaVendaRemover extends javax.swing.JFrame {
                 .addGap(156, 156, 156))
             .addGroup(layout.createSequentialGroup()
                 .addGap(143, 143, 143)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton43, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -78,9 +74,7 @@ public class TelaVendaRemover extends javax.swing.JFrame {
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton42)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton43)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         pack();
@@ -88,7 +82,6 @@ public class TelaVendaRemover extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton42;
-    private javax.swing.JButton jButton43;
     private javax.swing.JLabel jLabel64;
     private javax.swing.JList<String> jList8;
     private javax.swing.JScrollPane jScrollPane8;

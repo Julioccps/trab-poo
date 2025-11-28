@@ -13,11 +13,22 @@ import javax.swing.JFrame;
  */
 public class TelaVenda extends javax.swing.JFrame {
 
+    private final Concessionaria concessionaria;
+    private final TelaVendaCadastrar vendacadastrar;
+    private final TelaVendaConsultar vendaconsultar;
+    private final TelaVendaAlterar vendaalterar;
+    private final TelaVendaRemover vendaremover;
+
     /**
      * Creates new form Venda
      */
     public TelaVenda(Concessionaria concessionaria) {
         initComponents();
+        this.concessionaria = concessionaria;
+        this.vendacadastrar = new TelaVendaCadastrar(this.concessionaria);
+        this.vendaconsultar = new TelaVendaConsultar(this.concessionaria);
+        this.vendaalterar = new TelaVendaAlterar(this.concessionaria);
+        this.vendaremover = new TelaVendaRemover(this.concessionaria);
         setTitle("Menu Venda");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
@@ -36,14 +47,13 @@ public class TelaVenda extends javax.swing.JFrame {
         jButton23 = new javax.swing.JButton();
         jButton24 = new javax.swing.JButton();
         jButton25 = new javax.swing.JButton();
-        jButton26 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton22.setText("Cadastrar Venda");
         jButton22.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton22ActionPerformed(evt);
+                CadastrarVeiculoButtonActionPerformed(evt);
             }
         });
 
@@ -51,12 +61,25 @@ public class TelaVenda extends javax.swing.JFrame {
         jLabel6.setText("Menu Vendas");
 
         jButton23.setText("Consultar Venda");
+        jButton23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConsultarVeiculoButtonActionPerformed(evt);
+            }
+        });
 
         jButton24.setText("Alterar Venda");
+        jButton24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AlterarVeiculoButtonActionPerformed(evt);
+            }
+        });
 
         jButton25.setText("Remover Venda");
-
-        jButton26.setText("Voltar ao menu principal");
+        jButton25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoverVeiculoButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -70,7 +93,6 @@ public class TelaVenda extends javax.swing.JFrame {
                 .addContainerGap(123, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton26)
                     .addComponent(jButton23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -89,24 +111,33 @@ public class TelaVenda extends javax.swing.JFrame {
                 .addComponent(jButton24)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton25)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton26)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton22ActionPerformed
+    private void CadastrarVeiculoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarVeiculoButtonActionPerformed
+        this.vendacadastrar.setVisible(true);
+    }//GEN-LAST:event_CadastrarVeiculoButtonActionPerformed
+
+    private void ConsultarVeiculoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarVeiculoButtonActionPerformed
+        this.vendaconsultar.setVisible(true);
+    }//GEN-LAST:event_ConsultarVeiculoButtonActionPerformed
+
+    private void AlterarVeiculoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarVeiculoButtonActionPerformed
+        this.vendaalterar.setVisible(true);
+    }//GEN-LAST:event_AlterarVeiculoButtonActionPerformed
+
+    private void RemoverVeiculoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverVeiculoButtonActionPerformed
+        this.vendaremover.setVisible(true);
+    }//GEN-LAST:event_RemoverVeiculoButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton22;
     private javax.swing.JButton jButton23;
     private javax.swing.JButton jButton24;
     private javax.swing.JButton jButton25;
-    private javax.swing.JButton jButton26;
     private javax.swing.JLabel jLabel6;
     // End of variables declaration//GEN-END:variables
 }

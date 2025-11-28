@@ -13,11 +13,22 @@ import javax.swing.JFrame;
  */
 public class TelaRelatorio extends javax.swing.JFrame {
 
+    private final Concessionaria concessionaria;
+    private final TelaRelatorioCliente relatoriocliente;
+    private final TelaRelatorioFuncionario relatoriofuncionario;
+    private final TelaRelatorioVeiculo relatorioveiculo;
+    private final TelaRelatorioVenda relatoriovenda;
+
     /**
      * Creates new form Relatorio
      */
     public TelaRelatorio(Concessionaria concessionaria) {
         initComponents();
+        this.concessionaria = concessionaria;
+        this.relatoriocliente = new TelaRelatorioCliente(this.concessionaria);
+        this.relatoriofuncionario = new TelaRelatorioFuncionario(this.concessionaria);
+        this.relatorioveiculo = new TelaRelatorioVeiculo(this.concessionaria);
+        this.relatoriovenda = new TelaRelatorioVenda(this.concessionaria);
         setTitle("Menu Relatorio");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
@@ -36,7 +47,6 @@ public class TelaRelatorio extends javax.swing.JFrame {
         jButton28 = new javax.swing.JButton();
         jButton29 = new javax.swing.JButton();
         jButton30 = new javax.swing.JButton();
-        jButton31 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,18 +54,31 @@ public class TelaRelatorio extends javax.swing.JFrame {
         jLabel7.setText("Menu Relatorios");
 
         jButton27.setText("Relatorio de clientes");
+        jButton27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RelatorioClienteButtonActionPerformed(evt);
+            }
+        });
 
         jButton28.setText("Relatorio de funcionarios");
         jButton28.setToolTipText("");
+        jButton28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RelatorioFuncionarioButtonActionPerformed(evt);
+            }
+        });
 
         jButton29.setText("Relatorio de veiculos");
+        jButton29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RelatorioVeiculoButtonActionPerformed(evt);
+            }
+        });
 
         jButton30.setText("Relatorio de vendas");
-
-        jButton31.setText("Voltar ao menu principal");
-        jButton31.addActionListener(new java.awt.event.ActionListener() {
+        jButton30.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton31ActionPerformed(evt);
+                RelatorioVendaButtonActionPerformed(evt);
             }
         });
 
@@ -71,11 +94,10 @@ public class TelaRelatorio extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(114, 114, 114)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton28, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
                             .addComponent(jButton27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jButton30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(118, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -91,24 +113,33 @@ public class TelaRelatorio extends javax.swing.JFrame {
                 .addComponent(jButton29)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton30)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton31)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton31ActionPerformed
+    private void RelatorioClienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RelatorioClienteButtonActionPerformed
+        this.relatoriocliente.setVisible(true);
+    }//GEN-LAST:event_RelatorioClienteButtonActionPerformed
+
+    private void RelatorioFuncionarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RelatorioFuncionarioButtonActionPerformed
+        this.relatoriofuncionario.setVisible(true);
+    }//GEN-LAST:event_RelatorioFuncionarioButtonActionPerformed
+
+    private void RelatorioVeiculoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RelatorioVeiculoButtonActionPerformed
+        this.relatorioveiculo.setVisible(true);
+    }//GEN-LAST:event_RelatorioVeiculoButtonActionPerformed
+
+    private void RelatorioVendaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RelatorioVendaButtonActionPerformed
+        this.relatoriovenda.setVisible(true);
+    }//GEN-LAST:event_RelatorioVendaButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton27;
     private javax.swing.JButton jButton28;
     private javax.swing.JButton jButton29;
     private javax.swing.JButton jButton30;
-    private javax.swing.JButton jButton31;
     private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 }

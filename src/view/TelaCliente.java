@@ -14,14 +14,22 @@ import javax.swing.JFrame;
 public class TelaCliente extends javax.swing.JFrame {
     
     private final Concessionaria concessionaria;
+    private final TelaClienteCadastrar clientecadastrar;
+    private final TelaClienteConsultar clienteconsultar;
+    private final TelaClienteAlterar clientealterar;
+    private final TelaClienteRemover clienteremover;
             
     /**
      * Creates new form Cliente
-     * @param controller
+     * @param concessionaria
      */
-    public TelaCliente(Concessionaria controller) {
+    public TelaCliente(Concessionaria concessionaria) {
         initComponents();
-        this.concessionaria = controller;
+        this.concessionaria = concessionaria;
+        this.clientecadastrar = new TelaClienteCadastrar(this.concessionaria);
+        this.clienteconsultar = new TelaClienteConsultar(this.concessionaria);
+        this.clientealterar = new TelaClienteAlterar(this.concessionaria);
+        this.clienteremover = new TelaClienteRemover(this.concessionaria);
         setTitle("Menu Clientes");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
@@ -42,7 +50,6 @@ public class TelaCliente extends javax.swing.JFrame {
         jButtonConsultar = new javax.swing.JButton();
         jButtonAlterar = new javax.swing.JButton();
         jButtonRemover = new javax.swing.JButton();
-        jButtonMenuPrincipal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,14 +58,32 @@ public class TelaCliente extends javax.swing.JFrame {
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButtonCadastrar.setText("Cadastrar cliente");
+        jButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CadastrarClienteButtonActionPerformed(evt);
+            }
+        });
 
         jButtonConsultar.setText("Consultar cliente");
+        jButtonConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConsultarClienteButtonActionPerformed(evt);
+            }
+        });
 
         jButtonAlterar.setText("Alterar cliente");
+        jButtonAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AlterarClienteButtonActionPerformed(evt);
+            }
+        });
 
         jButtonRemover.setText("Remover cliente");
-
-        jButtonMenuPrincipal.setText("Voltar ao menu principal");
+        jButtonRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoverClienteButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -73,9 +98,7 @@ public class TelaCliente extends javax.swing.JFrame {
                         .addGap(114, 114, 114)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButtonAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jButtonRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButtonMenuPrincipal))
+                            .addComponent(jButtonRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jButtonCadastrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButtonConsultar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -94,19 +117,32 @@ public class TelaCliente extends javax.swing.JFrame {
                 .addComponent(jButtonAlterar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonRemover)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonMenuPrincipal)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void CadastrarClienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarClienteButtonActionPerformed
+        this.clientecadastrar.setVisible(true);
+    }//GEN-LAST:event_CadastrarClienteButtonActionPerformed
+
+    private void ConsultarClienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarClienteButtonActionPerformed
+        this.clienteconsultar.setVisible(true);
+    }//GEN-LAST:event_ConsultarClienteButtonActionPerformed
+
+    private void AlterarClienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarClienteButtonActionPerformed
+        this.clientealterar.setVisible(true);
+    }//GEN-LAST:event_AlterarClienteButtonActionPerformed
+
+    private void RemoverClienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverClienteButtonActionPerformed
+        this.clienteremover.setVisible(true);
+    }//GEN-LAST:event_RemoverClienteButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAlterar;
     private javax.swing.JButton jButtonCadastrar;
     private javax.swing.JButton jButtonConsultar;
-    private javax.swing.JButton jButtonMenuPrincipal;
     private javax.swing.JButton jButtonRemover;
     private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables

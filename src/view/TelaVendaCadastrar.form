@@ -49,18 +49,15 @@
                           <Component id="jLabel31" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jTextField18" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jComboBox1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField17" alignment="0" min="-2" pref="97" max="-2" attributes="0"/>
+                          <Component id="jTextField17" alignment="0" pref="97" max="32767" attributes="0"/>
+                          <Component id="jTextField18" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="147" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jButton39" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jButton38" alignment="0" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="jButton38" min="-2" pref="107" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="88" max="32767" attributes="0"/>
@@ -99,9 +96,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jButton38" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jButton39" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="32" max="32767" attributes="0"/>
+              <EmptySpace pref="67" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -201,11 +196,6 @@
     <Component class="javax.swing.JButton" name="jButton38">
       <Properties>
         <Property name="text" type="java.lang.String" value="Salvar e sair"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="jButton39">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Sair sem salvar"/>
       </Properties>
     </Component>
   </SubComponents>

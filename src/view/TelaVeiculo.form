@@ -33,10 +33,9 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="jButton17" alignment="1" min="-2" pref="179" max="-2" attributes="0"/>
                   <Group type="103" alignment="1" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="jButton18" alignment="1" max="32767" attributes="0"/>
+                      <Component id="jButton18" alignment="1" pref="179" max="32767" attributes="0"/>
                       <Component id="jButton19" alignment="0" max="32767" attributes="0"/>
                       <Component id="jButton20" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jButton21" alignment="0" min="-2" pref="179" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
@@ -56,9 +55,7 @@
               <Component id="jButton19" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jButton20" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jButton21" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="79" max="32767" attributes="0"/>
+              <EmptySpace pref="114" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -74,26 +71,33 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Cadastrar Veiculo"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CadastrarVeiculoButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton18">
       <Properties>
         <Property name="text" type="java.lang.String" value="Consultar Veiculo"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ConsultarVeiculoButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton19">
       <Properties>
         <Property name="text" type="java.lang.String" value="Alterar Veiculo"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AlterarVeiculoButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton20">
       <Properties>
         <Property name="text" type="java.lang.String" value="Remover Veiculo"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="jButton21">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Voltar ao menu principal"/>
-      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RemoverVeiculoButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
