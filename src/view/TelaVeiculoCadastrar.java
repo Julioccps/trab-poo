@@ -8,12 +8,12 @@ package view;
  *
  * @author Guilherme
  */
-public class VeiculoCadastrar extends javax.swing.JFrame {
+public class TelaVeiculoCadastrar extends javax.swing.JFrame {
 
     /**
      * Creates new form Veiculo
      */
-    public VeiculoCadastrar() {
+    public TelaVeiculoCadastrar() {
         initComponents();
     }
 

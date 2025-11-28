@@ -8,12 +8,12 @@ package view;
  *
  * @author Guilherme
  */
-public class VendaRemover extends javax.swing.JFrame {
+public class TelaVendaRemover extends javax.swing.JFrame {
 
     /**
      * Creates new form Venda
      */
-    public VendaRemover() {
+    public TelaVendaRemover() {
         initComponents();
     }
 

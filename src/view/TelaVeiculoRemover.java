@@ -8,12 +8,12 @@ package view;
  *
  * @author Guilherme
  */
-public class VeiculoRemover extends javax.swing.JFrame {
+public class TelaVeiculoRemover extends javax.swing.JFrame {
 
     /**
      * Creates new form Veiculo
      */
-    public VeiculoRemover() {
+    public TelaVeiculoRemover() {
         initComponents();
     }
 

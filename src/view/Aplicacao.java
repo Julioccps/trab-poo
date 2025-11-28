@@ -4,6 +4,8 @@
  */
 package view;
 
+import controller.Concessionaria;
+
 
 /**
  *
@@ -11,6 +13,12 @@ package view;
  */
 public class Aplicacao extends javax.swing.JFrame {
 
+    private final Concessionaria concessionaria;
+    private final TelaCliente telacliente;
+    private final TelaFuncionario telafuncionario;
+    private final TelaVeiculo telaveiculo;
+    private final TelaVenda telavenda;
+    private final TelaRelatorio telarelatorio;
 
 
     /**
@@ -18,7 +26,12 @@ public class Aplicacao extends javax.swing.JFrame {
      */
     public Aplicacao() {
         initComponents();
-
+        this.concessionaria = new Concessionaria();
+        this.telacliente = new TelaCliente(this.concessionaria);
+        this.telafuncionario = new TelaFuncionario(this.concessionaria);
+        this.telaveiculo = new TelaVeiculo(this.concessionaria);
+        this.telavenda = new TelaVenda(this.concessionaria);
+        this.telarelatorio = new TelaRelatorio(this.concessionaria);
     }
 
     /**

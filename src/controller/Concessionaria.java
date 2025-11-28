@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Concessionaria {
+    public Concessionaria() {
+        super();
+    }
+    
     public static void menuCliente(Scanner leitura, ArrayList<Cliente> clientes) {
         int opt;
         opt = -1;

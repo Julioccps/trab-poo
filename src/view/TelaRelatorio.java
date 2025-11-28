@@ -4,6 +4,8 @@
  */
 package view;
 
+import controller.Concessionaria;
+
 /**
  *
  * @author Guilherme
@@ -13,7 +15,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
     /**
      * Creates new form Relatorio
      */
-    public TelaRelatorio() {
+    public TelaRelatorio(Concessionaria concessionaria) {
         initComponents();
     }
 

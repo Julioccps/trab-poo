@@ -11,13 +11,20 @@ import controller.Concessionaria;
  * @author Guilherme
  */
 public class TelaCliente extends javax.swing.JFrame {
-
+    
+    private final Concessionaria concessionaria;
+            
     /**
      * Creates new form Cliente
+     * @param controller
      */
-    public TelaCliente() {
+    public TelaCliente(Concessionaria controller) {
         initComponents();
+        this.concessionaria = controller;
+        
     }
+
+
     
     /**
      * This method is called from within the constructor to initialize the form.

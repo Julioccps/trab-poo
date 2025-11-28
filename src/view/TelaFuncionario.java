@@ -4,6 +4,8 @@
  */
 package view;
 
+import controller.Concessionaria;
+
 /**
  *
  * @author Guilherme
@@ -13,7 +15,7 @@ public class TelaFuncionario extends javax.swing.JFrame {
     /**
      * Creates new form Funcionario
      */
-    public TelaFuncionario() {
+    public TelaFuncionario(Concessionaria concessionaria) {
         initComponents();
     }
 

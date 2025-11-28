@@ -4,16 +4,18 @@
  */
 package view;
 
+import controller.Concessionaria;
+
 /**
  *
  * @author Guilherme
  */
-public class Veiculo extends javax.swing.JFrame {
+public class TelaVeiculo extends javax.swing.JFrame {
 
     /**
      * Creates new form Veiculo
      */
-    public Veiculo() {
+    public TelaVeiculo(Concessionaria concessionaria) {
         initComponents();
     }
 

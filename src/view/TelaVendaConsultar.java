@@ -8,12 +8,12 @@ package view;
  *
  * @author Guilherme
  */
-public class VendaConsultar extends javax.swing.JFrame {
+public class TelaVendaConsultar extends javax.swing.JFrame {
 
     /**
      * Creates new form Venda
      */
-    public VendaConsultar() {
+    public TelaVendaConsultar() {
         initComponents();
     }
 
