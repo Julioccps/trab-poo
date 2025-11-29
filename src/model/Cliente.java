@@ -3,17 +3,17 @@ package model;
 public class Cliente extends Pessoa{
     private String telefone;
     private String email;
-    private int rg;
+    private String rg;
     private String cpf;
     
-    public Cliente(String nome, String telefone, String email, int rg, String cpf){
+    public Cliente(String nome, String telefone, String email, String rg, String cpf){
         super(nome);
         this.telefone = telefone;
         this.email = email;
         this.rg = rg;
         this.cpf = cpf;
     }
-    public void cadastrar(String nome, String telefone, String email, int rg, String cpf) {
+    public void cadastrar(String nome, String telefone, String email, String rg, String cpf) {
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
@@ -27,7 +27,7 @@ public class Cliente extends Pessoa{
                 + ", RG: " + rg + ", CPF: " + cpf);
     }
     public void alterar(String novo_nome, String novo_telefone, String novo_email,
-            int novo_rg, String novo_cpf) {
+            String novo_rg, String novo_cpf) {
         nome = novo_nome;
         telefone = novo_telefone;
         email = novo_email;
@@ -63,11 +63,11 @@ public class Cliente extends Pessoa{
         this.email = email;
     }
 
-    public int getRg() {
+    public String getRg() {
         return rg;
     }
 
-    public void setRg(int rg) {
+    public void setRg(String rg) {
         this.rg = rg;
     }
 

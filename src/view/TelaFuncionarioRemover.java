@@ -19,6 +19,7 @@ public class TelaFuncionarioRemover extends javax.swing.JFrame {
     public TelaFuncionarioRemover(Concessionaria concessionaria) {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setTitle("Remover Funcionario");
     }
 
     /**

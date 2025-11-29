@@ -8,10 +8,43 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Concessionaria {
+
+    private final ArrayList<Cliente> clientes;
     public Concessionaria() {
         super();
+        this.clientes = new ArrayList<>();
     }
     
+    public void cadastrarCliente(String nome, String tel, String email, String rg, String cpf){
+        clientes.add(new Cliente(nome, tel, email, rg, cpf));
+        System.out.println("\nCliente adicionado com sucesso\n");
+    }
+    
+    public ArrayList<Cliente> consultarCliente(){
+        return this.clientes;
+    }
+    
+    public void alterarCliente(String nome, String tel, String email, String rg, String cpf, String cpfBusca){
+        for (Cliente cliente : this.clientes) {
+            if (cliente.getCpf().equals(cpfBusca)) {
+                cliente.alterar(nome, tel, email, rg, cpf);// Usa o CPF para a busca do cliente
+                System.out.println("\nCliente alterado com sucesso\n");
+                return;
+            }
+        }
+        System.out.println("\nErro: Cliente com CPF " + cpfBusca + " não encontrado para alteração.\n");
+    }
+    public void removerCliente(String cpfBusca) {
+        for (int i = 0; i < this.clientes.size(); i++) {
+            Cliente cliente = this.clientes.get(i);
+            if (cliente.getCpf().equals(cpfBusca)) {
+            this.clientes.remove(i);
+                System.out.println("\nCliente com CPF " + cpfBusca + " removido com sucesso.\n");
+                return;
+            }
+            System.out.println("\nErro: Cliente com CPF " + cpfBusca + " não encontrado para remoção.\n");
+        }
+    }
     public static void menuCliente(Scanner leitura, ArrayList<Cliente> clientes) {
         int opt;
         opt = -1;
@@ -33,12 +66,12 @@ public class Concessionaria {
                     //System.out.print("Email do cliente: ");
                     String email = leitura.nextLine();
                     //System.out.print("RG do cliente: ");
-                    int rg = leitura.nextInt();
+                    String rg = leitura.nextLine();
                     leitura.nextLine(); 
                     //System.out.print("CPF do cliente: ");
                     String cpf = leitura.nextLine();
                     clientes.add(new Cliente(nome, tel, email, rg, cpf));
-                    //System.out.println("Cliente adicionado com sucesso");
+                    System.out.println("Cliente adicionado com sucesso");
                     opt = -1; 
                     break; 
                 }
@@ -70,7 +103,7 @@ public class Concessionaria {
                     //System.out.print("Novo email do cliente: ");
                     String email = leitura.nextLine();
                     //System.out.print("Novo RG do cliente: ");
-                    int rg = leitura.nextInt();
+                    String rg = leitura.nextLine();
                     leitura.nextLine(); 
                     //System.out.print("Novo CPF do cliente: ");
                     String cpf = leitura.nextLine();

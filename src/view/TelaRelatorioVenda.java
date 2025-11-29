@@ -19,6 +19,7 @@ public class TelaRelatorioVenda extends javax.swing.JFrame {
     public TelaRelatorioVenda(Concessionaria concessionaria) {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setTitle("Relatorio Venda");
     }
 
     /**

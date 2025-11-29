@@ -19,6 +19,7 @@ public class TelaFuncionarioConsultar extends javax.swing.JFrame {
     public TelaFuncionarioConsultar(Concessionaria concessionaria) {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setTitle("Consultar Funcionario");
     }
 
     /**

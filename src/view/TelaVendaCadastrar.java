@@ -19,6 +19,7 @@ public class TelaVendaCadastrar extends javax.swing.JFrame {
     public TelaVendaCadastrar(Concessionaria concessionaria) {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setTitle("Cadastrar Venda");
     }
 
     /**

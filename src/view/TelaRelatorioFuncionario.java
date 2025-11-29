@@ -19,6 +19,7 @@ public class TelaRelatorioFuncionario extends javax.swing.JFrame {
     public TelaRelatorioFuncionario(Concessionaria concessionaria) {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setTitle("Relatorio Funcionario");
     }
 
     /**

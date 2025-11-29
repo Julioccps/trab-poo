@@ -5,7 +5,9 @@
 package view;
 
 import controller.Concessionaria;
+import java.util.ArrayList;
 import javax.swing.JFrame;
+import model.Cliente;
 
 /**
  *
@@ -22,6 +24,7 @@ public class TelaCliente extends javax.swing.JFrame {
     /**
      * Creates new form Cliente
      * @param concessionaria
+     * @param clientes
      */
     public TelaCliente(Concessionaria concessionaria) {
         initComponents();

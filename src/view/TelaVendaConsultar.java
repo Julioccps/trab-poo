@@ -19,6 +19,7 @@ public class TelaVendaConsultar extends javax.swing.JFrame {
     public TelaVendaConsultar(Concessionaria concessionaria) {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setTitle("Consultar Venda");
     }
 
     /**

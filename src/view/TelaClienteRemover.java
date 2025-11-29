@@ -5,20 +5,43 @@
 package view;
 
 import controller.Concessionaria;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import model.Cliente;
 
 /**
  *
  * @author Guilherme
  */
 public class TelaClienteRemover extends javax.swing.JFrame {
-
+    private final Concessionaria controller;
+    private final DefaultListModel<String> listModel;
+    private ArrayList<Cliente> clientes;
     /**
      * Creates new form ClienteRemover
+     * @param controller
      */
-    public TelaClienteRemover(Concessionaria concessionaria) {
+    public TelaClienteRemover(Concessionaria controller) {
         initComponents();
+        this.controller = controller;
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setTitle("Remover Clientes");
+        
+        this.listModel = new DefaultListModel<>();
+        jList2.setModel(this.listModel);
+        preencherListaClientes();
+    }
+    private void preencherListaClientes() {
+        this.listModel.clear();
+        this.clientes = this.controller.consultarCliente();
+        ArrayList<Cliente> listaClientes = this.controller.consultarCliente();
+        
+        for (Cliente cliente : listaClientes) {
+            String infoCliente = cliente.getNome() + " - " + cliente.getCpf();
+            this.listModel.addElement(infoCliente);
+        }
     }
 
     /**
@@ -33,7 +56,8 @@ public class TelaClienteRemover extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList<>();
-        jButton42 = new javax.swing.JButton();
+        jButtonEnviar = new javax.swing.JButton();
+        jButtonBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,43 +71,96 @@ public class TelaClienteRemover extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jList2);
 
-        jButton42.setText("Salvar e sair");
+        jButtonEnviar.setText("Enviar");
+        jButtonEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EnviarButtonActionPerformed(evt);
+            }
+        });
+
+        jButtonBuscar.setText("Buscar");
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(153, 153, 153)
-                        .addComponent(jLabel17))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(115, 115, 115)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(105, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(137, 137, 137))
+                .addContainerGap(111, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButtonEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(145, 145, 145))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(110, 110, 110))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(153, 153, 153)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonBuscar)
+                    .addComponent(jLabel17))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addComponent(jButtonBuscar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton42)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addComponent(jButtonEnviar)
+                .addGap(21, 21, 21))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void EnviarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnviarButtonActionPerformed
+        try{
+            int selectedIndex = jList2.getSelectedIndex();
+            if (selectedIndex == -1) {
+                JOptionPane.showMessageDialog(this, "Selecione um cliente para remover.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            Cliente clienteParaRemover = this.clientes.get(selectedIndex);
+            String cpfParaRemover = clienteParaRemover.getCpf();
+            
+
+            int confirm = JOptionPane.showConfirmDialog(this, 
+                    "Tem certeza que deseja remover o cliente: " + clienteParaRemover.getNome() + "?", 
+                    "Confirmar Remoção", JOptionPane.YES_NO_OPTION);
+            
+            if (confirm == JOptionPane.YES_OPTION) {
+                
+
+                this.controller.removerCliente(cpfParaRemover); 
+                
+
+                preencherListaClientes();
+                JOptionPane.showMessageDialog(this, "Cliente removido com sucesso!");
+            }
+            
+        } 
+        catch (IndexOutOfBoundsException e) {
+             JOptionPane.showMessageDialog(this, "Erro: Cliente não encontrado na lista interna.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_EnviarButtonActionPerformed
+
+    private void BuscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarButtonActionPerformed
+        preencherListaClientes();
+    }//GEN-LAST:event_BuscarButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton42;
+    private javax.swing.JButton jButtonBuscar;
+    private javax.swing.JButton jButtonEnviar;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JList<String> jList2;
     private javax.swing.JScrollPane jScrollPane2;

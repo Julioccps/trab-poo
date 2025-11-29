@@ -19,6 +19,7 @@ public class TelaFuncionarioCadastrar extends javax.swing.JFrame {
     public TelaFuncionarioCadastrar(Concessionaria concessionaria) {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setTitle("Cadastrar Funcionario");
     }
 
     /**

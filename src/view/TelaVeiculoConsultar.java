@@ -19,6 +19,7 @@ public class TelaVeiculoConsultar extends javax.swing.JFrame {
     public TelaVeiculoConsultar(Concessionaria concessionaria) {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setTitle("Consultar Veiculo");
     }
 
     /**

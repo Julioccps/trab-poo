@@ -19,6 +19,7 @@ public class TelaVendaRemover extends javax.swing.JFrame {
     public TelaVendaRemover(Concessionaria concessionaria) {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setTitle("Remover Venda");
     }
 
     /**

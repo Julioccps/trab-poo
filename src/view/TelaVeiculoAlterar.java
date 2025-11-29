@@ -19,6 +19,7 @@ public class TelaVeiculoAlterar extends javax.swing.JFrame {
     public TelaVeiculoAlterar(Concessionaria concessionaria) {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setTitle("Alterar Veiculo");
     }
 
     /**

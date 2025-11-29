@@ -19,6 +19,7 @@ public class TelaFuncionarioAlterar extends javax.swing.JFrame {
     public TelaFuncionarioAlterar(Concessionaria concessionaria) {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setTitle("Alterar Funcionario");
     }
 
     /**
