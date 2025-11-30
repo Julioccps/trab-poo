@@ -10,9 +10,18 @@ import java.util.Scanner;
 public class Concessionaria {
 
     private final ArrayList<Cliente> clientes;
+    private final ArrayList<Funcionario> funcionarios;
+    private final ArrayList<Veiculo> veiculos;
+    private final ArrayList<Venda> vendas;
+    private final ArrayList<Object> relatorios;
+    
     public Concessionaria() {
         super();
         this.clientes = new ArrayList<>();
+        this.funcionarios = new ArrayList<>();
+        this.veiculos = new ArrayList<>();
+        this.vendas = new ArrayList<>();
+        this.relatorios = new ArrayList<>();
     }
     
     public void cadastrarCliente(String nome, String tel, String email, String rg, String cpf){
@@ -27,34 +36,35 @@ public class Concessionaria {
     public void alterarCliente(String nome, String tel, String email, String rg, String cpf, String cpfBusca){
         for (Cliente cliente : this.clientes) {
             if (cliente.getCpf().equals(cpfBusca)) {
-                cliente.alterar(nome, tel, email, rg, cpf);// Usa o CPF para a busca do cliente
+                cliente.alterar(nome, tel, email, rg, cpf); // Usa o CPF para a busca do cliente, talvez mudar a logica disso.
                 System.out.println("\nCliente alterado com sucesso\n");
                 return;
             }
         }
-        System.out.println("\nErro: Cliente com CPF " + cpfBusca + " não encontrado para alteração.\n");
+        System.out.println("\nErro: Cliente com CPF " + cpfBusca + " nao encontrado para alteracao.\n");
     }
     public void removerCliente(String cpfBusca) {
         for (int i = 0; i < this.clientes.size(); i++) {
             Cliente cliente = this.clientes.get(i);
             if (cliente.getCpf().equals(cpfBusca)) {
-            this.clientes.remove(i);
+                this.clientes.remove(i);
                 System.out.println("\nCliente com CPF " + cpfBusca + " removido com sucesso.\n");
                 return;
             }
-            System.out.println("\nErro: Cliente com CPF " + cpfBusca + " não encontrado para remoção.\n");
+            System.out.println("\nErro: Cliente com CPF " + cpfBusca + " nao encontrado para remocao.\n");
         }
     }
-    public static void menuCliente(Scanner leitura, ArrayList<Cliente> clientes) {
+    
+    /*public static void menuCliente(Scanner leitura, ArrayList<Cliente> clientes) {
         int opt;
         opt = -1;
         while (opt != 0) {
-            /*System.out.println("|----- Menu Clientes ------------|");
+            System.out.println("|----- Menu Clientes ------------|");
             System.out.println("|--- 1 Cadastrar cliente --------|");
             System.out.println("|--- 2 Consultar cliente --------|");
             System.out.println("|--- 3 Alterar cliente ----------|");
             System.out.println("|--- 4 Remover cliente ----------|");
-            System.out.println("|--- 0 Voltar ao menu principal -|");*/
+            System.out.println("|--- 0 Voltar ao menu principal -|");
             opt = leitura.nextInt();
             leitura.nextLine(); 
             switch (opt) {
@@ -76,11 +86,11 @@ public class Concessionaria {
                     break; 
                 }
                 case 2: {
-                    /*System.out.println("|---------- Clientes ------------|");
+                    System.out.println("|---------- Clientes ------------|");
                     for (int i = 0; i < clientes.size(); i++){
                         System.out.println("  " + (i) + " - " + clientes.get(i).getNome());
                     }
-                    System.out.println("Escolha qual cliente consultar (pelo indice):");*/
+                    System.out.println("Escolha qual cliente consultar (pelo indice):");
                     opt = leitura.nextInt();
                     leitura.nextLine(); 
                     clientes.get(opt).consultar();
@@ -88,11 +98,11 @@ public class Concessionaria {
                     break; 
                 }
                 case 3: {
-                    /*System.out.println("|---------- Clientes ------------|");
+                    System.out.println("|---------- Clientes ------------|");
                     for (int i = 0; i < clientes.size(); i++){
                         System.out.println("  " + (i) + " - " + clientes.get(i).getNome());
                     }
-                    System.out.println("Escolha qual cliente alterar (pelo indice):");*/
+                    System.out.println("Escolha qual cliente alterar (pelo indice):");
                     opt = leitura.nextInt();
                     leitura.nextLine(); 
                     
@@ -114,11 +124,11 @@ public class Concessionaria {
                     break; 
                 }
                 case 4: {
-                    /*System.out.println("|---------- Clientes ------------|");
+                    System.out.println("|---------- Clientes ------------|");
                     for (int i = 0; i < clientes.size(); i++){
                         System.out.println("  " + (i) + " - " + clientes.get(i).getNome());
                     }
-                    System.out.println("Escolha qual cliente remover (pelo indice):");*/
+                    System.out.println("Escolha qual cliente remover (pelo indice):");
                     opt = leitura.nextInt();
                     leitura.nextLine(); 
                     
@@ -138,18 +148,50 @@ public class Concessionaria {
                 }
             }
         }
+    }*/
+    
+    public void cadastrarFuncionario(String nome, String mat, String qual, String desc, String carga) {
+        funcionarios.add(new Funcionario(nome, mat, qual, desc, carga));
+        System.out.println("\nFuncionario adicionado com sucesso\n");
     }
     
-    public static void menuFuncionario(Scanner leitura, ArrayList<Funcionario> funcionarios) {
+    public ArrayList<Funcionario> consultarFuncionario() {
+        return this.funcionarios;
+    }
+    
+    public void alterarFuncionario(String nome, String mat, String qual, String desc, String carga, String matBusca) {
+        for (Funcionario funcionario : this.funcionarios) {
+            if (funcionario.getNum_matricula().equals(matBusca)) {
+                funcionario.alterar(nome, mat, qual, desc, carga);
+                System.out.println("\nFuncionario alterado com sucesso\n");
+                return;
+            }
+        }
+        System.out.println("\nErro: Numero de matricula do funcionario " + matBusca + " nao encontrado para alteracao.\n");
+    }
+    
+    public void removerFuncionario(String matBusca) {
+        for (int i = 0; i < this.funcionarios.size(); i++) {
+            Funcionario funcionario = this.funcionarios.get(i);
+            if (funcionario.getNum_matricula().equals(matBusca)) {
+                this.funcionarios.remove(i);
+                System.out.println("\nFuncionario com o numero de matricula " + matBusca + " removido com sucesso.\n");
+                return;
+            }
+            System.out.println("\nErro: Funcionario com o numero de matricula " + matBusca + " nao encontrado para remocao.\n");
+        }
+    }
+
+    /*public static void menuFuncionario(Scanner leitura, ArrayList<Funcionario> funcionarios) {
         int opt;
         opt = -1;
         while (opt != 0){
-            /*System.out.println("|----- Menu Funcionarios ------------|");
+            System.out.println("|----- Menu Funcionarios ------------|");
             System.out.println("|--- 1 Cadastrar Funcionario --------|");
             System.out.println("|--- 2 Consultar Funcionario --------|");
             System.out.println("|--- 3 Alterar Funcionario ----------|");
             System.out.println("|--- 4 Remover Funcionario ----------|");
-            System.out.println("|--- 0 Voltar ao menu principal -----|");*/
+            System.out.println("|--- 0 Voltar ao menu principal -----|");
             opt = leitura.nextInt();
             leitura.nextLine(); 
             switch (opt) {
@@ -173,11 +215,11 @@ public class Concessionaria {
                     break;
                 }
                 case 2: {
-                    /*System.out.println("|---------- Funcionarios ------------|");
+                    System.out.println("|---------- Funcionarios ------------|");
                     for (int i = 0; i < funcionarios.size(); i++){
                         System.out.println("  " + (i) + " - " + funcionarios.get(i).getNome());
                     }
-                    System.out.println("Escolha qual funcionario consultar (pelo indice):");*/
+                    System.out.println("Escolha qual funcionario consultar (pelo indice):");
                     opt = leitura.nextInt();
                     leitura.nextLine(); 
                     
@@ -186,11 +228,11 @@ public class Concessionaria {
                     break;
                 }
                 case 3: {
-                    /*System.out.println("|---------- Funcionarios ------------|");
+                    System.out.println("|---------- Funcionarios ------------|");
                     for (int i = 0; i < funcionarios.size(); i++){
                         System.out.println("  " + (i) + " - " + funcionarios.get(i).getNome());
                     }
-                    System.out.println("Escolha qual funcionario alterar (pelo indice):");*/
+                    System.out.println("Escolha qual funcionario alterar (pelo indice):");
                     opt = leitura.nextInt();
                     leitura.nextLine(); 
                     
@@ -213,11 +255,11 @@ public class Concessionaria {
                     break;
                 }
                 case 4: {
-                    /*System.out.println("|---------- Funcionarios ------------|");
+                    System.out.println("|---------- Funcionarios ------------|");
                     for (int i = 0; i < funcionarios.size(); i++){
                         System.out.println("  " + (i) + " - " + funcionarios.get(i).getNome());
                     }
-                    System.out.println("Escolha qual funcionario remover (pelo indice):");*/
+                    System.out.println("Escolha qual funcionario remover (pelo indice):");
                     opt = leitura.nextInt();
                     leitura.nextLine(); 
                     
@@ -237,6 +279,22 @@ public class Concessionaria {
                 }
             }    
         }
+    }*/
+    
+    public void cadastrarVeiculo() {
+        
+    }
+    
+    public void consultarVeiculo() {
+        
+    }
+    
+    public void alterarVeiculo() {
+        
+    }
+    
+    public void removerVeiculo() {
+        
     }
     
     public static void menuVeiculo(Scanner leitura, ArrayList<Veiculo> veiculos) {
@@ -340,6 +398,22 @@ public class Concessionaria {
                 }
             }
         }
+    }
+    
+    public void cadastrarVenda() {
+        
+    }
+    
+    public void consultarVenda() {
+        
+    }
+    
+    public void alterarVenda() {
+        
+    }
+    
+    public void removerVenda() {
+        
     }
     
     public static void menuVenda(Scanner leitura, ArrayList<Venda> vendas, 
@@ -489,6 +563,22 @@ public class Concessionaria {
                 }
             }
         }
+    }
+    
+    public void clienteRelatorio() {
+        
+    }
+    
+    public void funcionarioRelatorio() {
+        
+    }
+    
+    public void veiculoRelatorio() {
+        
+    }
+    
+    public void vendaRelatorio() {
+        
     }
     
     public static void menuRelatorio(Scanner leitura, ArrayList<Cliente> clientes, ArrayList<Funcionario> funcionarios,

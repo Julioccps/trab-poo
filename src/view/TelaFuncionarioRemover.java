@@ -5,21 +5,45 @@
 package view;
 
 import controller.Concessionaria;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import model.Funcionario;
 
 /**
  *
  * @author Guilherme
  */
 public class TelaFuncionarioRemover extends javax.swing.JFrame {
-
+    private final Concessionaria controller;
+    private final DefaultListModel<String> listModel;
+    private ArrayList<Funcionario> funcionarios;
+    
     /**
      * Creates new form Funcionario
+     * @param controller
      */
-    public TelaFuncionarioRemover(Concessionaria concessionaria) {
+    public TelaFuncionarioRemover(Concessionaria controller) {
         initComponents();
+        this.controller = controller;
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Remover Funcionario");
+        
+        this.listModel = new DefaultListModel<>();
+        jListRemover.setModel(this.listModel);
+        preencherListaFuncionarios();
+    }
+    
+    private void preencherListaFuncionarios() {
+        this.listModel.clear();
+        this.funcionarios = this.controller.consultarFuncionario();
+        ArrayList<Funcionario> listaFuncionarios = this.controller.consultarFuncionario();
+        
+        for (Funcionario funcionario : listaFuncionarios) {
+            String infoFuncionario = funcionario.getNome() + " - " + funcionario.getNum_matricula();
+            this.listModel.addElement(infoFuncionario);
+        }
     }
 
     /**
@@ -33,21 +57,34 @@ public class TelaFuncionarioRemover extends javax.swing.JFrame {
 
         jLabel47 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jList4 = new javax.swing.JList<>();
-        jButton42 = new javax.swing.JButton();
+        jListRemover = new javax.swing.JList<>();
+        jButtonEnviar = new javax.swing.JButton();
+        jButtonBusca = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel47.setText("Remover funcionario");
 
-        jList4.setModel(new javax.swing.AbstractListModel<String>() {
+        jListRemover.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane4.setViewportView(jList4);
+        jScrollPane4.setViewportView(jListRemover);
 
-        jButton42.setText("Salvar e sair");
+        jButtonEnviar.setText("Enviar");
+        jButtonEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EnviarButtonActionPerformed(evt);
+            }
+        });
+
+        jButtonBusca.setText("Busca");
+        jButtonBusca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -59,32 +96,75 @@ public class TelaFuncionarioRemover extends javax.swing.JFrame {
                         .addGap(142, 142, 142)
                         .addComponent(jLabel47))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(108, 108, 108)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(jButtonEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(143, 143, 143)
-                        .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(110, Short.MAX_VALUE))
+                        .addGap(157, 157, 157)
+                        .addComponent(jButtonBusca)))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel47)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonBusca)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton42)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addComponent(jButtonEnviar)
+                .addGap(27, 27, 27))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscaActionPerformed
+       preencherListaFuncionarios();
+    }//GEN-LAST:event_BuscaActionPerformed
+
+    private void EnviarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnviarButtonActionPerformed
+        try{
+            int selectedIndex = jListRemover.getSelectedIndex();
+            if (selectedIndex == -1) {
+                JOptionPane.showMessageDialog(this, "Selecione um funcionario para remover.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            Funcionario funcionarioParaRemover = this.funcionarios.get(selectedIndex);
+            String numMatParaRemover = funcionarioParaRemover.getNum_matricula();
+            
+
+            int confirm = JOptionPane.showConfirmDialog(this, 
+                    "Tem certeza que deseja remover o funcionario: " + funcionarioParaRemover.getNome() + "?", 
+                    "Confirmar Remoção", JOptionPane.YES_NO_OPTION);
+            
+            if (confirm == JOptionPane.YES_OPTION) {
+                
+
+                this.controller.removerCliente(numMatParaRemover); 
+                
+
+                preencherListaFuncionarios();
+                JOptionPane.showMessageDialog(this, "Funcionario removido com sucesso!");
+            }
+            
+        } 
+        catch (IndexOutOfBoundsException e) {
+             JOptionPane.showMessageDialog(this, "Erro: Funcionario não encontrado na lista interna.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_EnviarButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton42;
+    private javax.swing.JButton jButtonBusca;
+    private javax.swing.JButton jButtonEnviar;
     private javax.swing.JLabel jLabel47;
-    private javax.swing.JList<String> jList4;
+    private javax.swing.JList<String> jListRemover;
     private javax.swing.JScrollPane jScrollPane4;
     // End of variables declaration//GEN-END:variables
 }

@@ -12,12 +12,15 @@ import javax.swing.JFrame;
  * @author Guilherme
  */
 public class TelaFuncionarioCadastrar extends javax.swing.JFrame {
-
+    
+    private final Concessionaria controller;
     /**
      * Creates new form Funcionario
+     * @param controller
      */
-    public TelaFuncionarioCadastrar(Concessionaria concessionaria) {
+    public TelaFuncionarioCadastrar(Concessionaria controller) {
         initComponents();
+        this.controller = controller;
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Funcionario");
     }
@@ -37,11 +40,11 @@ public class TelaFuncionarioCadastrar extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
+        jTextFieldNumero = new javax.swing.JTextField();
+        jTextFieldQualificacao = new javax.swing.JTextField();
+        jTextFieldDescricaoQualificacao = new javax.swing.JTextField();
+        jTextFieldNome = new javax.swing.JTextField();
+        jTextFieldCarga = new javax.swing.JTextField();
         jButton34 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -64,16 +67,10 @@ public class TelaFuncionarioCadastrar extends javax.swing.JFrame {
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel21.setText("Carga horaria semanal:");
 
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
-            }
-        });
-
-        jButton34.setText("Salvar e sair");
+        jButton34.setText("Enviar");
         jButton34.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton34ActionPerformed(evt);
+                EnviarButtonActionPerformed(evt);
             }
         });
 
@@ -97,11 +94,11 @@ public class TelaFuncionarioCadastrar extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextField8, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                .addComponent(jTextField7)
-                                .addComponent(jTextField6)
-                                .addComponent(jTextField9)
-                                .addComponent(jTextField10))
+                                .addComponent(jTextFieldDescricaoQualificacao, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                .addComponent(jTextFieldQualificacao)
+                                .addComponent(jTextFieldNumero)
+                                .addComponent(jTextFieldNome)
+                                .addComponent(jTextFieldCarga))
                             .addComponent(jButton34, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(45, 101, Short.MAX_VALUE))
         );
@@ -113,23 +110,23 @@ public class TelaFuncionarioCadastrar extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldQualificacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldDescricaoQualificacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldCarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton34)
                 .addContainerGap(67, Short.MAX_VALUE))
@@ -138,13 +135,23 @@ public class TelaFuncionarioCadastrar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
-
-    private void jButton34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton34ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton34ActionPerformed
+    private void limparCampos() {
+       this.jTextFieldNome.setText("");
+       this.jTextFieldNumero.setText("");
+       this.jTextFieldQualificacao.setText("");
+       this.jTextFieldDescricaoQualificacao.setText("");
+       this.jTextFieldCarga.setText("");
+    }
+    private void EnviarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnviarButtonActionPerformed
+        String nome = jTextFieldNome.getText();
+        String num = jTextFieldNumero.getText();
+        String qual = jTextFieldQualificacao.getText();
+        String desc = jTextFieldDescricaoQualificacao.getText();
+        String carga = jTextFieldCarga.getText();
+        
+        this.controller.cadastrarFuncionario(nome, num, qual, desc, carga);
+        this.limparCampos();
+    }//GEN-LAST:event_EnviarButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton34;
@@ -154,10 +161,10 @@ public class TelaFuncionarioCadastrar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField jTextFieldCarga;
+    private javax.swing.JTextField jTextFieldDescricaoQualificacao;
+    private javax.swing.JTextField jTextFieldNome;
+    private javax.swing.JTextField jTextFieldNumero;
+    private javax.swing.JTextField jTextFieldQualificacao;
     // End of variables declaration//GEN-END:variables
 }

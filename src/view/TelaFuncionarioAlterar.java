@@ -12,16 +12,26 @@ import javax.swing.JFrame;
  * @author Guilherme
  */
 public class TelaFuncionarioAlterar extends javax.swing.JFrame {
-
+    private final Concessionaria controller;
     /**
      * Creates new form Funcionario
+     * @param controller
      */
-    public TelaFuncionarioAlterar(Concessionaria concessionaria) {
+    public TelaFuncionarioAlterar(Concessionaria controller) {
         initComponents();
+        this.controller = controller;
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Alterar Funcionario");
     }
-
+    
+    private void limparCampos() {
+       this.jTextFieldNome.setText("");
+       this.jTextFieldNumeroMatricula.setText("");
+       this.jTextFieldQualificacao.setText("");
+       this.jTextFieldDescricaoQualificacao.setText("");
+       this.jTextFieldCarga.setText("");
+       this.jTextFieldNumeroMatriculaBusca.setText("");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,16 +43,18 @@ public class TelaFuncionarioAlterar extends javax.swing.JFrame {
 
         jLabel40 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
-        jTextField24 = new javax.swing.JTextField();
+        jTextFieldNome = new javax.swing.JTextField();
         jLabel43 = new javax.swing.JLabel();
-        jTextField25 = new javax.swing.JTextField();
+        jTextFieldNumeroMatricula = new javax.swing.JTextField();
         jLabel44 = new javax.swing.JLabel();
-        jTextField26 = new javax.swing.JTextField();
+        jTextFieldQualificacao = new javax.swing.JTextField();
         jLabel45 = new javax.swing.JLabel();
-        jTextField27 = new javax.swing.JTextField();
+        jTextFieldDescricaoQualificacao = new javax.swing.JTextField();
         jLabel46 = new javax.swing.JLabel();
-        jTextField28 = new javax.swing.JTextField();
-        jButton44 = new javax.swing.JButton();
+        jTextFieldCarga = new javax.swing.JTextField();
+        jButtonEnviar = new javax.swing.JButton();
+        jLabel47 = new javax.swing.JLabel();
+        jTextFieldNumeroMatriculaBusca = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,12 +66,6 @@ public class TelaFuncionarioAlterar extends javax.swing.JFrame {
         jLabel43.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel43.setText("Numero da matricula:");
 
-        jTextField25.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField25ActionPerformed(evt);
-            }
-        });
-
         jLabel44.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel44.setText("Qualificacao:");
 
@@ -69,12 +75,15 @@ public class TelaFuncionarioAlterar extends javax.swing.JFrame {
         jLabel46.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel46.setText("Carga horaria semanal:");
 
-        jButton44.setText("Salvar e sair");
-        jButton44.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEnviar.setText("Enviar");
+        jButtonEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton44ActionPerformed(evt);
+                EnviarButtonActionPerformed(evt);
             }
         });
+
+        jLabel47.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel47.setText("Numero da matricula de busca:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,76 +96,91 @@ public class TelaFuncionarioAlterar extends javax.swing.JFrame {
                         .addComponent(jLabel40))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel42, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel43, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel44, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel46, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel45, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextField27)
-                                .addComponent(jTextField26)
-                                .addComponent(jTextField25)
-                                .addComponent(jTextField24)
-                                .addComponent(jTextField28, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton44, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(101, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel42, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel43, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel44, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel46, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel45, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel47)
+                                .addGap(15, 15, 15)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldDescricaoQualificacao)
+                            .addComponent(jTextFieldQualificacao)
+                            .addComponent(jTextFieldNumeroMatricula)
+                            .addComponent(jTextFieldNome)
+                            .addComponent(jTextFieldCarga, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(jButtonEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldNumeroMatriculaBusca))))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel40)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldNumeroMatriculaBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel47))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel42)
-                    .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel43)
-                    .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldNumeroMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel44)
-                    .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldQualificacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel45)
-                    .addComponent(jTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldDescricaoQualificacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel46)
-                    .addComponent(jTextField28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton44)
-                .addContainerGap(67, Short.MAX_VALUE))
+                    .addComponent(jTextFieldCarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonEnviar)
+                .addGap(41, 41, 41))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField25ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField25ActionPerformed
-
-    private void jButton44ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton44ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton44ActionPerformed
+    private void EnviarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnviarButtonActionPerformed
+        String nome = jTextFieldNome.getText();
+        String num = jTextFieldNumeroMatricula.getText();
+        String qual = jTextFieldQualificacao.getText();
+        String desc = jTextFieldDescricaoQualificacao.getText();
+        String carga = jTextFieldCarga.getText();
+        String numBusca = jTextFieldNumeroMatriculaBusca.getText();
+        
+        this.controller.alterarFuncionario(nome, num, qual, desc, carga, numBusca);
+        this.limparCampos();
+    }//GEN-LAST:event_EnviarButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton44;
+    private javax.swing.JButton jButtonEnviar;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
-    private javax.swing.JTextField jTextField24;
-    private javax.swing.JTextField jTextField25;
-    private javax.swing.JTextField jTextField26;
-    private javax.swing.JTextField jTextField27;
-    private javax.swing.JTextField jTextField28;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JTextField jTextFieldCarga;
+    private javax.swing.JTextField jTextFieldDescricaoQualificacao;
+    private javax.swing.JTextField jTextFieldNome;
+    private javax.swing.JTextField jTextFieldNumeroMatricula;
+    private javax.swing.JTextField jTextFieldNumeroMatriculaBusca;
+    private javax.swing.JTextField jTextFieldQualificacao;
     // End of variables declaration//GEN-END:variables
 }

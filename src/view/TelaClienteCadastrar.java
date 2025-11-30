@@ -5,9 +5,7 @@
 package view;
 
 import controller.Concessionaria;
-import java.util.ArrayList;
 import javax.swing.JFrame;
-import model.Cliente;
 
 /**
  *
@@ -20,7 +18,6 @@ public class TelaClienteCadastrar extends javax.swing.JFrame {
     /**
      * Creates new form CadastrarCliente
      * @param controller
-     * @param clientes
      */
     public TelaClienteCadastrar(Concessionaria controller) {
         initComponents();
