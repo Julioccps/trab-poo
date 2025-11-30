@@ -13,7 +13,6 @@ public class Concessionaria {
     private final ArrayList<Funcionario> funcionarios;
     private final ArrayList<Veiculo> veiculos;
     private final ArrayList<Venda> vendas;
-    private final ArrayList<Object> relatorios;
     
     public Concessionaria() {
         super();
@@ -21,7 +20,6 @@ public class Concessionaria {
         this.funcionarios = new ArrayList<>();
         this.veiculos = new ArrayList<>();
         this.vendas = new ArrayList<>();
-        this.relatorios = new ArrayList<>();
     }
     
     public void cadastrarCliente(String nome, String tel, String email, String rg, String cpf){
@@ -281,32 +279,63 @@ public class Concessionaria {
         }
     }*/
     
-    public void cadastrarVeiculo() {
-        
+    private Veiculo buscarVeiculoPorId(String idBusca) {
+        for (Veiculo veiculo : this.veiculos) {
+            if (veiculo.getId().equals(idBusca)) {
+                return veiculo;
+            }
+        }
+        return null;
     }
     
-    public void consultarVeiculo() {
-        
+    public void cadastrarVeiculo(String nome, String cor, String numMarchas, String numPortas, String marca, String ano, String id) {
+        if (buscarVeiculoPorId(id) != null) {
+            System.out.println("\nErro: Veiculo com o identificador " + id + " ja cadastrado.\n");
+            return;
+        }   
+        else{
+            veiculos.add(new Veiculo(nome, cor, numMarchas, numPortas, marca, ano, id));
+            System.out.println("\nVeiculo adicionado com sucesso\n");
+        }
     }
     
-    public void alterarVeiculo() {
-        
+    public ArrayList<Veiculo> consultarVeiculo() {
+        return this.veiculos;
     }
     
-    public void removerVeiculo() {
-        
-    }
+    public void alterarVeiculo(String nome, String cor, String numMarchas, String numPortas, String marca, String ano, String id) {
+        Veiculo veiculo = buscarVeiculoPorId(id);
+            if (veiculo != null) {
+                veiculo.alterar(nome, cor, numMarchas, numPortas, marca, ano, id);
+                System.out.println("\nVeiculo alterado com sucesso\n");
+                return;
+            }
+
+            System.out.println("\nErro: O identificador do veiculo: " + id + " nao encontrado para alteracao.\n");
+        }
     
-    public static void menuVeiculo(Scanner leitura, ArrayList<Veiculo> veiculos) {
+    public void removerVeiculo(String idBusca) {
+        Veiculo veiculoParaRemover = buscarVeiculoPorId(idBusca);
+
+        if (veiculoParaRemover != null) {
+            this.veiculos.remove(veiculoParaRemover);
+            System.out.println("\nVeiculo com o identificador " + idBusca + " removido com sucesso.\n");
+            return;
+        }
+        System.out.println("\nErro: Veiculo com o identificador " + idBusca + " nao encontrado para remocao.\n");
+    }
+
+    
+    /*public static void menuVeiculo(Scanner leitura, ArrayList<Veiculo> veiculos) {
         int opt;
         opt = -1;
         while (opt != 0){
-            /*System.out.println("|----- Menu Veiculos ------------|");
+            System.out.println("|----- Menu Veiculos ------------|");
             System.out.println("|--- 1 Cadastrar Veiculo --------|");
             System.out.println("|--- 2 Consultar Veiculo --------|");
             System.out.println("|--- 3 Alterar Veiculo ----------|");
             System.out.println("|--- 4 Remover Veiculo ----------|");
-            System.out.println("|--- 0 Voltar ao menu principal -|");*/
+            System.out.println("|--- 0 Voltar ao menu principal -|");
             opt = leitura.nextInt();
             leitura.nextLine(); 
             switch (opt) {
@@ -331,11 +360,11 @@ public class Concessionaria {
                     break;
                 }
                 case 2: {
-                    /*System.out.println("|---------- Veiculos ------------|");
+                    System.out.println("|---------- Veiculos ------------|");
                     for (int i = 0; i < veiculos.size(); i++){
                         System.out.println("  " + (i) + " - " + veiculos.get(i).getNome());
                     }
-                    System.out.println("Escolha qual veiculo consultar (pelo indice):");*/
+                    System.out.println("Escolha qual veiculo consultar (pelo indice):");
                     opt = leitura.nextInt();
                     leitura.nextLine();
                     
@@ -344,11 +373,11 @@ public class Concessionaria {
                     break;
                 }
                 case 3: {
-                    /*System.out.println("|---------- Veiculos ------------|");
+                    System.out.println("|---------- Veiculos ------------|");
                     for (int i = 0; i < veiculos.size(); i++){
                         System.out.println("  " + (i) + " - " + veiculos.get(i).getNome());
                     }
-                    System.out.println("Escolha qual veiculo alterar (pelo indice):");*/
+                    System.out.println("Escolha qual veiculo alterar (pelo indice):");
                     opt = leitura.nextInt();
                     leitura.nextLine(); 
                     
@@ -374,11 +403,11 @@ public class Concessionaria {
                     break;
                 }
                 case 4: {
-                    /*System.out.println("|---------- Veiculos ------------|");
+                    System.out.println("|---------- Veiculos ------------|");
                     for (int i = 0; i < veiculos.size(); i++){
                         System.out.println("  " + (i) + " - " + veiculos.get(i).getNome());
                     }
-                    System.out.println("Escolha qual veiculo remover (pelo indice):");*/
+                    System.out.println("Escolha qual veiculo remover (pelo indice):");
                     opt = leitura.nextInt();
                     leitura.nextLine(); 
                     
@@ -398,14 +427,15 @@ public class Concessionaria {
                 }
             }
         }
+    }*/
+    
+    public void cadastrarVenda(String dat, String val, Cliente cli, Funcionario func, Veiculo vei) {
+        vendas.add(new Venda(dat, val, cli, func, vei));
+        System.out.println("\nVenda adicionado com sucesso\n");
     }
     
-    public void cadastrarVenda() {
-        
-    }
-    
-    public void consultarVenda() {
-        
+    public ArrayList<Venda> consultarVenda() {
+        return this.vendas;
     }
     
     public void alterarVenda() {
@@ -416,18 +446,18 @@ public class Concessionaria {
         
     }
     
-    public static void menuVenda(Scanner leitura, ArrayList<Venda> vendas, 
+    /*public static void menuVenda(Scanner leitura, ArrayList<Venda> vendas, 
             ArrayList<Cliente> clientes, ArrayList<Funcionario> funcionarios, ArrayList<Veiculo> veiculos) {
         
         int opt;
         opt = -1;
         while (opt != 0) {
-            /*System.out.println("|----- Menu Vendas ------------|");
+            System.out.println("|----- Menu Vendas ------------|");
             System.out.println("|--- 1 Cadastrar Venda --------|");
             System.out.println("|--- 2 Consultar Venda --------|");
             System.out.println("|--- 3 Alterar Venda ----------|");
             System.out.println("|--- 4 Remover Venda ----------|");
-            System.out.println("|--- 0 Voltar ao menu principal -|");*/
+            System.out.println("|--- 0 Voltar ao menu principal -|");
             opt = leitura.nextInt();
             leitura.nextLine(); 
             switch (opt) {
@@ -438,34 +468,34 @@ public class Concessionaria {
                     float valor = leitura.nextFloat();
                     leitura.nextLine(); 
                     
-                    /*System.out.println("|---------- Clientes ------------|");
+                    System.out.println("|---------- Clientes ------------|");
                     for (int i = 0; i < clientes.size(); i++){
                         System.out.println("  " + (i) + " - " + clientes.get(i).getNome());
                     }
-                    System.out.println("Selecione o cliente (pelo indice):");*/
+                    System.out.println("Selecione o cliente (pelo indice):");
                     int clienteIndex = leitura.nextInt();
                     leitura.nextLine(); 
                     Cliente cliente = clientes.get(clienteIndex);
                     
-                    /*System.out.println("|---------- Funcionarios ------------|");
+                    System.out.println("|---------- Funcionarios ------------|");
                     for (int i = 0; i < funcionarios.size(); i++){
                         System.out.println("  " + (i) + " - " + funcionarios.get(i).getNome());
                     }
-                    System.out.println("Selecione o funcionario (pelo indice):");*/
+                    System.out.println("Selecione o funcionario (pelo indice):");
                     int funcIndex = leitura.nextInt();
                     leitura.nextLine(); 
                     Funcionario funcionario = funcionarios.get(funcIndex);
                     
-                    /*System.out.println("|---------- Veiculos ------------|");
+                    System.out.println("|---------- Veiculos ------------|");
                     for (int i = 0; i < veiculos.size(); i++){
                         System.out.println("  " + (i) + " - " + veiculos.get(i).getNome());
                     }
-                    System.out.println("Selecione o veiculo (pelo indice):");*/
+                    System.out.println("Selecione o veiculo (pelo indice):");
                     int veicIndex = leitura.nextInt();
                     leitura.nextLine(); 
                     Veiculo veiculo = veiculos.get(veicIndex);
                     
-                    Venda novaVenda = new Venda();
+                    Venda novaVenda = new Venda(dat, val, cli, func, vei);
                     novaVenda.cadastrar(data, valor, cliente, funcionario, veiculo);
                     vendas.add(novaVenda);
                     
@@ -474,13 +504,13 @@ public class Concessionaria {
                     break;
                 }
                 case 2: {
-                    /*System.out.println("|---------- Vendas ------------|");
+                    System.out.println("|---------- Vendas ------------|");
                     for (int i = 0; i < vendas.size(); i++){
                         System.out.println("  " + (i) + " - Data: " + vendas.get(i).getData() + 
                                 ", Cliente: " + vendas.get(i).getCliente().getNome() + 
                                 ", Veiculo: " + vendas.get(i).getVeiculo().getNome());
                     }
-                    System.out.println("Escolha qual venda consultar (pelo indice):");*/
+                    System.out.println("Escolha qual venda consultar (pelo indice):");
                     opt = leitura.nextInt();
                     leitura.nextLine();
                     
@@ -489,12 +519,12 @@ public class Concessionaria {
                     break;
                 }
                 case 3: {
-                    /*System.out.println("|---------- Vendas ------------|");
+                    /ystem.out.println("|---------- Vendas ------------|");
                     for (int i = 0; i < vendas.size(); i++){
                         System.out.println("  " + (i) + " - Data: " + vendas.get(i).getData() + 
                                 ", Cliente: " + vendas.get(i).getCliente().getNome());
                     }
-                    System.out.println("Escolha qual venda alterar (pelo indice):");*/
+                    System.out.println("Escolha qual venda alterar (pelo indice):");
                     opt = leitura.nextInt();
                     leitura.nextLine();
                     
@@ -504,29 +534,29 @@ public class Concessionaria {
                     float valor = leitura.nextFloat();
                     leitura.nextLine();
                     
-                    /*System.out.println("|---------- Clientes ------------|");
+                    System.out.println("|---------- Clientes ------------|");
                     for (int i = 0; i < clientes.size(); i++){
                         System.out.println("  " + (i) + " - " + clientes.get(i).getNome());
                     }
-                    System.out.println("Selecione o novo cliente (pelo indice):");*/
+                    System.out.println("Selecione o novo cliente (pelo indice):");
                     int clienteIndex = leitura.nextInt();
                     leitura.nextLine();
                     Cliente cliente = clientes.get(clienteIndex);
                     
-                    /*System.out.println("|---------- Funcionarios ------------|");
+                    System.out.println("|---------- Funcionarios ------------|");
                     for (int i = 0; i < funcionarios.size(); i++){
                         System.out.println("  " + (i) + " - " + funcionarios.get(i).getNome());
                     }
-                    System.out.println("Selecione o novo funcionario (pelo indice):");*/
+                    System.out.println("Selecione o novo funcionario (pelo indice):");
                     int funcIndex = leitura.nextInt();
                     leitura.nextLine();
                     Funcionario funcionario = funcionarios.get(funcIndex);
                     
-                    /*System.out.println("|---------- Veiculos ------------|");
+                    System.out.println("|---------- Veiculos ------------|");
                     for (int i = 0; i < veiculos.size(); i++){
                         System.out.println("  " + (i) + " - " + veiculos.get(i).getNome());
                     }
-                    System.out.println("Selecione o novo veiculo (pelo indice):");*/
+                    System.out.println("Selecione o novo veiculo (pelo indice):");
                     int veicIndex = leitura.nextInt();
                     leitura.nextLine();
                     Veiculo veiculo = veiculos.get(veicIndex);
@@ -538,12 +568,12 @@ public class Concessionaria {
                     break;
                 }
                 case 4: {
-                    /*System.out.println("|---------- Vendas ------------|");
+                    System.out.println("|---------- Vendas ------------|");
                     for (int i = 0; i < vendas.size(); i++){
                         System.out.println("  " + (i) + " - Data: " + vendas.get(i).getData() + 
                                 ", Cliente: " + vendas.get(i).getCliente().getNome());
                     }
-                    System.out.println("Escolha qual venda remover (pelo indice):");*/
+                    System.out.println("Escolha qual venda remover (pelo indice):");
                     opt = leitura.nextInt();
                     leitura.nextLine();
                     
@@ -563,7 +593,7 @@ public class Concessionaria {
                 }
             }
         }
-    }
+    }*/
     
     public void clienteRelatorio() {
         

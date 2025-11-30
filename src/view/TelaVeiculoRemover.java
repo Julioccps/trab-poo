@@ -5,21 +5,44 @@
 package view;
 
 import controller.Concessionaria;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import model.Veiculo;
 
 /**
  *
  * @author Guilherme
  */
 public class TelaVeiculoRemover extends javax.swing.JFrame {
-
+    private final Concessionaria controller;
+    private final DefaultListModel<String> listModel;
+    private ArrayList<Veiculo> veiculos;
     /**
      * Creates new form Veiculo
+     * @param controller
      */
-    public TelaVeiculoRemover(Concessionaria concessionaria) {
+    public TelaVeiculoRemover(Concessionaria controller) {
         initComponents();
+        this.controller = controller;
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Remover Veiculo");
+        
+        this.listModel = new DefaultListModel<>();
+        jListRemover.setModel(this.listModel);
+        preencherListaVeiculos();
+    }
+
+    private void preencherListaVeiculos() {
+        this.listModel.clear();
+        this.veiculos = this.controller.consultarVeiculo();
+        ArrayList<Veiculo> listaVeiculos = this.controller.consultarVeiculo();
+        
+        for (Veiculo veiculo : listaVeiculos) {
+            String infoVeiculo = veiculo.getNome() + " - " + veiculo.getId();
+            this.listModel.addElement(infoVeiculo);
+        }
     }
 
     /**
@@ -33,21 +56,34 @@ public class TelaVeiculoRemover extends javax.swing.JFrame {
 
         jLabel56 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jList6 = new javax.swing.JList<>();
-        jButton42 = new javax.swing.JButton();
+        jListRemover = new javax.swing.JList<>();
+        jButtonEnviar = new javax.swing.JButton();
+        jButtonBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel56.setText("Remover veiculo");
 
-        jList6.setModel(new javax.swing.AbstractListModel<String>() {
+        jListRemover.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane6.setViewportView(jList6);
+        jScrollPane6.setViewportView(jListRemover);
 
-        jButton42.setText("Salvar e sair");
+        jButtonEnviar.setText("Enviar");
+        jButtonEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EnviarButtonActionPerformed(evt);
+            }
+        });
+
+        jButtonBuscar.setText("Buscar");
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -57,34 +93,75 @@ public class TelaVeiculoRemover extends javax.swing.JFrame {
                 .addContainerGap(110, Short.MAX_VALUE)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(110, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel56)
-                .addGap(153, 153, 153))
             .addGroup(layout.createSequentialGroup()
                 .addGap(144, 144, 144)
-                .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel56)
+                    .addComponent(jButtonBuscar))
+                .addGap(166, 166, 166))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel56)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonBuscar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton42)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addComponent(jButtonEnviar)
+                .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BuscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarButtonActionPerformed
+        preencherListaVeiculos();
+    }//GEN-LAST:event_BuscarButtonActionPerformed
+
+    private void EnviarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnviarButtonActionPerformed
+        try{
+            int selectedIndex = jListRemover.getSelectedIndex();
+            if (selectedIndex == -1) {
+                JOptionPane.showMessageDialog(this, "Selecione um veiculo para remover.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            Veiculo veiculoParaRemover = this.veiculos.get(selectedIndex);
+            String idParaRemover = veiculoParaRemover.getId();
+            
+
+            int confirm = JOptionPane.showConfirmDialog(this, 
+                    "Tem certeza que deseja remover o veiculo: " + veiculoParaRemover.getNome() + "?", 
+                    "Confirmar Remoção", JOptionPane.YES_NO_OPTION);
+            
+            if (confirm == JOptionPane.YES_OPTION) {
+                
+
+                this.controller.removerVeiculo(idParaRemover); 
+                
+
+                preencherListaVeiculos();
+                JOptionPane.showMessageDialog(this, "Veiculo removido com sucesso!");
+            }
+            
+        } 
+        catch (IndexOutOfBoundsException e) {
+             JOptionPane.showMessageDialog(this, "Erro: Veiculo não encontrado na lista interna.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_EnviarButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton42;
+    private javax.swing.JButton jButtonBuscar;
+    private javax.swing.JButton jButtonEnviar;
     private javax.swing.JLabel jLabel56;
-    private javax.swing.JList<String> jList6;
+    private javax.swing.JList<String> jListRemover;
     private javax.swing.JScrollPane jScrollPane6;
     // End of variables declaration//GEN-END:variables
 }

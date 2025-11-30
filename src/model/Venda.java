@@ -2,16 +2,16 @@ package model;
 
 public class Venda {
     private String data;
-    private float valor;
+    private String valor;
     private Cliente cliente;
     private Funcionario funcionario;
     private Veiculo veiculo;
     
-    public Venda(){
+    public Venda(String dat, String val, Cliente cli, Funcionario func, Veiculo vei){
         super();
     }
     
-    public void cadastrar(String data, float valor, Cliente cliente, Funcionario funcionario, Veiculo veiculo){
+    public void cadastrar(String data, String valor, Cliente cliente, Funcionario funcionario, Veiculo veiculo){
         this.data = data;
         this.valor = valor;
         this.cliente = cliente;
@@ -23,7 +23,7 @@ public class Venda {
                 ", Funcionario: " + funcionario.getNome() + ", Veiculo: " + veiculo.getNome());        
     }
     
-    public void alterar(String nova_data, float novo_valor, 
+    public void alterar(String nova_data, String novo_valor, 
             Cliente novo_cliente, Funcionario novo_funcionario, Veiculo novo_veiculo){ // REFATORAR
         data = nova_data;
         valor = novo_valor;
@@ -34,7 +34,7 @@ public class Venda {
     
     public void remover(){ // REFATORAR
         data = "";
-        valor = -1.0f;
+        valor = "";
     }
     public String getData() {
         return data;
@@ -44,11 +44,11 @@ public class Venda {
         this.data = data;
     }
 
-    public float getValor() {
+    public String getValor() {
         return valor;
     }
 
-    public void setValor(float valor) {
+    public void setValor(String valor) {
         this.valor = valor;
     }
 
