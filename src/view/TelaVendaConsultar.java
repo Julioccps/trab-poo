@@ -5,23 +5,53 @@
 package view;
 
 import controller.Concessionaria;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import model.Venda;
+import model.Cliente;
+import model.Funcionario;
+import model.Veiculo;
 
 /**
  *
  * @author Guilherme
  */
 public class TelaVendaConsultar extends javax.swing.JFrame {
-
+    private final Concessionaria controller;
+    private final DefaultListModel<String> listModel;
     /**
      * Creates new form Venda
+     * @param controller
      */
-    public TelaVendaConsultar(Concessionaria concessionaria) {
+    public TelaVendaConsultar(Concessionaria controller) {
         initComponents();
+        this.controller = controller;
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Consultar Venda");
+        
+        this.listModel = new DefaultListModel<>();
+        jListConsultar.setModel(this.listModel);
+        preencherListaVendas();
     }
-
+    
+    private void preencherListaVendas() {
+        this.listModel.clear();
+        ArrayList<Venda> listaVendas = this.controller.consultarVenda();
+        
+        for (int i = 0; i < listaVendas.size(); i++) {
+            Venda venda = listaVendas.get(i);
+            String infoVenda = venda.getData() + " - " +
+                venda.getCliente().getNome() +venda.getFuncionario().getNome() + " - " +
+                venda.getVeiculo().getNome() + " - " + venda.getValor();
+                
+            this.listModel.addElement(infoVenda);
+        }
+    
+        if (listaVendas.isEmpty()) {
+            this.listModel.addElement("Nenhuma venda cadastrada.");
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,19 +62,27 @@ public class TelaVendaConsultar extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane7 = new javax.swing.JScrollPane();
-        jList7 = new javax.swing.JList<>();
+        jListConsultar = new javax.swing.JList<>();
         jLabel63 = new javax.swing.JLabel();
+        jButtonBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jList7.setModel(new javax.swing.AbstractListModel<String>() {
+        jListConsultar.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane7.setViewportView(jList7);
+        jScrollPane7.setViewportView(jListConsultar);
 
         jLabel63.setText("Consultar venda");
+
+        jButtonBuscar.setText("Buscar");
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -56,7 +94,9 @@ public class TelaVendaConsultar extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(154, 154, 154)
-                .addComponent(jLabel63)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonBuscar)
+                    .addComponent(jLabel63))
                 .addContainerGap(160, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -64,17 +104,24 @@ public class TelaVendaConsultar extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel63)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(jButtonBuscar)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addGap(45, 45, 45))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BuscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarButtonActionPerformed
+       preencherListaVendas(); 
+    }//GEN-LAST:event_BuscarButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonBuscar;
     private javax.swing.JLabel jLabel63;
-    private javax.swing.JList<String> jList7;
+    private javax.swing.JList<String> jListConsultar;
     private javax.swing.JScrollPane jScrollPane7;
     // End of variables declaration//GEN-END:variables
 }

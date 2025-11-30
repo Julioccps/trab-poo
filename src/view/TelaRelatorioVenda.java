@@ -5,23 +5,48 @@
 package view;
 
 import controller.Concessionaria;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import model.Venda;
 
 /**
  *
  * @author Guilherme
  */
 public class TelaRelatorioVenda extends javax.swing.JFrame {
-
+    private final Concessionaria controller;
     /**
      * Creates new form Relatorio
+     * @param controller
      */
-    public TelaRelatorioVenda(Concessionaria concessionaria) {
+    public TelaRelatorioVenda(Concessionaria controller) {
         initComponents();
+        this.controller = controller;
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Relatorio Venda");
+        relatorioVenda();
     }
+    
+    public void relatorioVenda() {
+        ArrayList<Venda> listaVendas = controller.consultarVenda();
+        DefaultListModel<String> model = new DefaultListModel<>();
 
+        if (listaVendas.isEmpty()) {
+            model.addElement("Nenhum Venda cadastrada.");
+        } 
+        else {
+            for (Venda venda : listaVendas) {
+                String item = "Data: " + venda.getData()+
+                            " | Valor: " + venda.getValor()+
+                            " | Cliente: " + venda.getCliente()+
+                            " | Numero de marchas: " + venda.getFuncionario()+ 
+                            " | Numero de portas: " + venda.getVeiculo();
+                model.addElement(item);
+            }
+        }
+    }
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,50 +57,66 @@ public class TelaRelatorioVenda extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane12 = new javax.swing.JScrollPane();
-        jList12 = new javax.swing.JList<>();
+        jListRelatorio = new javax.swing.JList<>();
         jLabel68 = new javax.swing.JLabel();
+        jButtonBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jList12.setModel(new javax.swing.AbstractListModel<String>() {
+        jListRelatorio.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane12.setViewportView(jList12);
+        jScrollPane12.setViewportView(jListRelatorio);
 
         jLabel68.setText("Relatorio vendas");
+
+        jButtonBuscar.setText("Buscar");
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(108, 108, 108))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(153, 153, 153)
-                        .addComponent(jLabel68)))
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addGap(153, 153, 153)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonBuscar)
+                    .addComponent(jLabel68))
+                .addContainerGap(160, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel68)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonBuscar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addGap(39, 39, 39))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BuscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarButtonActionPerformed
+        relatorioVenda();
+    }//GEN-LAST:event_BuscarButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonBuscar;
     private javax.swing.JLabel jLabel68;
-    private javax.swing.JList<String> jList12;
+    private javax.swing.JList<String> jListRelatorio;
     private javax.swing.JScrollPane jScrollPane12;
     // End of variables declaration//GEN-END:variables
 }

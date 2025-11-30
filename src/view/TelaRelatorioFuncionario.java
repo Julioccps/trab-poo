@@ -5,23 +5,48 @@
 package view;
 
 import controller.Concessionaria;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import model.Funcionario;
 
 /**
  *
  * @author Guilherme
  */
 public class TelaRelatorioFuncionario extends javax.swing.JFrame {
-
+    private final Concessionaria controller;
     /**
      * Creates new form Relatorio
+     * @param controller
      */
-    public TelaRelatorioFuncionario(Concessionaria concessionaria) {
+    public TelaRelatorioFuncionario(Concessionaria controller) {
         initComponents();
+        this.controller = controller;
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Relatorio Funcionario");
+        relatorioFuncionario();
     }
+    
+    public void relatorioFuncionario() {
+        ArrayList<Funcionario> listaFuncionarios = controller.consultarFuncionario();
+        DefaultListModel<String> model = new DefaultListModel<>();
 
+        if (listaFuncionarios.isEmpty()) {
+            model.addElement("Nenhum Funcionario cadastrado.");
+        } 
+        else {
+            for (Funcionario funcionario : listaFuncionarios) {
+                String item = "Nome: " + funcionario.getNome() +
+                            " | Numero Matricula: " + funcionario.getNum_matricula() +
+                            " | Qualificacao:" + funcionario.getQualificacao() +
+                            " | Descricao qualificacao: " + funcionario.getDescricao_qualificacao()+   
+                            " | Carga horaria semanal: " + funcionario.getCarga_horaria_semanal();
+                model.addElement(item);
+            }
+        }
+        jListRelatorio.setModel(model);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,19 +57,27 @@ public class TelaRelatorioFuncionario extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane10 = new javax.swing.JScrollPane();
-        jList10 = new javax.swing.JList<>();
+        jListRelatorio = new javax.swing.JList<>();
         jLabel66 = new javax.swing.JLabel();
+        jButtonBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jList10.setModel(new javax.swing.AbstractListModel<String>() {
+        jListRelatorio.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane10.setViewportView(jList10);
+        jScrollPane10.setViewportView(jListRelatorio);
 
         jLabel66.setText("Relatorio funcionarios");
+
+        jButtonBuscar.setText("Buscar");
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -58,23 +91,34 @@ public class TelaRelatorioFuncionario extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel66)
                 .addGap(138, 138, 138))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(161, 161, 161)
+                .addComponent(jButtonBuscar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel66)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonBuscar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addGap(46, 46, 46))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BuscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarButtonActionPerformed
+        relatorioFuncionario();
+    }//GEN-LAST:event_BuscarButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonBuscar;
     private javax.swing.JLabel jLabel66;
-    private javax.swing.JList<String> jList10;
+    private javax.swing.JList<String> jListRelatorio;
     private javax.swing.JScrollPane jScrollPane10;
     // End of variables declaration//GEN-END:variables
 }
