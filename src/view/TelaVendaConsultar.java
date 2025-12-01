@@ -39,12 +39,8 @@ public class TelaVendaConsultar extends javax.swing.JFrame {
         this.listModel.clear();
         ArrayList<Venda> listaVendas = this.controller.consultarVenda();
         
-        for (int i = 0; i < listaVendas.size(); i++) {
-            Venda venda = listaVendas.get(i);
-            String infoVenda = venda.getData() + " - " +
-                venda.getCliente().getNome() +venda.getFuncionario().getNome() + " - " +
-                venda.getVeiculo().getNome() + " - " + venda.getValor();
-                
+        for (Venda venda : listaVendas) {
+            String infoVenda = venda.getData() + " - ";
             this.listModel.addElement(infoVenda);
         }
     
