@@ -37,7 +37,7 @@ public class TelaClienteConsultar extends javax.swing.JFrame {
         ArrayList<Cliente> listaClientes = this.controller.consultarCliente();
         
         for (Cliente cliente : listaClientes) {
-            String infoCliente = cliente.getNome() + " - " + cliente.getCpf();
+            String infoCliente = "Nome: " + cliente.getNome() + " - CPF: " + cliente.getCpf();
             this.listModel.addElement(infoCliente);
         }
     }

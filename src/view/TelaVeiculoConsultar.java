@@ -36,7 +36,7 @@ public class TelaVeiculoConsultar extends javax.swing.JFrame {
         ArrayList<Veiculo> listaVeiculos = this.controller.consultarVeiculo();
         
         for (Veiculo veiculo : listaVeiculos) {
-            String infoVeiculo = veiculo.getNome() + " - " + veiculo.getId();
+            String infoVeiculo = "Nome: " + veiculo.getNome() + " - Identificador: " + veiculo.getId();
             this.listModel.addElement(infoVeiculo);
         }
     }

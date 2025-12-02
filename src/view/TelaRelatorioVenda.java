@@ -39,13 +39,14 @@ public class TelaRelatorioVenda extends javax.swing.JFrame {
             for (Venda venda : listaVendas) {
                 String item = "Data: " + venda.getData()+
                             " | Valor: " + venda.getValor()+
-                            " | Cliente: " + venda.getCliente()+
-                            " | Numero de marchas: " + venda.getFuncionario()+ 
-                            " | Numero de portas: " + venda.getVeiculo()+
-                            " | Identificador: " + venda.getId();
+                            " | CPF do cliente: " + venda.getCliente().getCpf()+
+                            " | Numero de matricula funcionario: " + venda.getFuncionario().getNum_matricula()+ 
+                            " | Identificador do veiculo: " + venda.getVeiculo().getId()+
+                            " | Identificador da venda: " + venda.getId();
                 model.addElement(item);
             }
         }
+        jListRelatorio.setModel(model);
     }
         
     /**

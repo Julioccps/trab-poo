@@ -68,6 +68,7 @@ public class TelaVendaCadastrar extends javax.swing.JFrame {
     private void limparCampos() {
        this.jTextFieldData.setText("");
        this.jTextFieldValor.setText("");
+       this.jTextFieldId.setText("");
     }
     /**
      * This method is called from within the constructor to initialize the form.

@@ -37,7 +37,7 @@ public class TelaFuncionarioConsultar extends javax.swing.JFrame {
         ArrayList<Funcionario> listaFuncionarios = this.controller.consultarFuncionario();
         
         for (Funcionario funcionario : listaFuncionarios) {
-            String infoFuncionario = funcionario.getNome() + " - " + funcionario.getNum_matricula();
+            String infoFuncionario = "Nome: " + funcionario.getNome() + " - Numero de Matricula: " + funcionario.getNum_matricula();
             this.listModel.addElement(infoFuncionario);
         }
     }
