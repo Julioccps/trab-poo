@@ -5,23 +5,50 @@
 package view;
 
 import controller.Concessionaria;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import model.Venda;
 
 /**
  *
  * @author Guilherme
  */
 public class TelaVendaRemover extends javax.swing.JFrame {
-
+    private final Concessionaria controller;
+    private final DefaultListModel<String> listModel;
+    private ArrayList<Venda> vendas;
     /**
      * Creates new form Venda
+     * @param controller
      */
-    public TelaVendaRemover(Concessionaria concessionaria) {
+    public TelaVendaRemover(Concessionaria controller) {
         initComponents();
+        this.controller = controller;
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Remover Venda");
+        
+        this.listModel = new DefaultListModel<>();
+        jListRemover.setModel(this.listModel);
+        preencherListaVendas();
     }
-
+    
+    private void preencherListaVendas() {
+        this.listModel.clear();
+        this.vendas = this.controller.consultarVenda();
+        ArrayList<Venda> listaVendas = this.controller.consultarVenda();
+        
+        for (Venda venda : listaVendas) {
+            String infoVenda = "Id: " + venda.getId() + " - Data: " + venda.getData() + " - Valor: " + venda.getValor();
+            this.listModel.addElement(infoVenda);
+        }
+    
+        if (listaVendas.isEmpty()) {
+            this.listModel.addElement("Nenhuma venda cadastrada.");
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,59 +59,114 @@ public class TelaVendaRemover extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane8 = new javax.swing.JScrollPane();
-        jList8 = new javax.swing.JList<>();
+        jListRemover = new javax.swing.JList<>();
         jLabel64 = new javax.swing.JLabel();
-        jButton42 = new javax.swing.JButton();
+        jButtonEnviar = new javax.swing.JButton();
+        jButtonBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jList8.setModel(new javax.swing.AbstractListModel<String>() {
+        jListRemover.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane8.setViewportView(jList8);
+        jScrollPane8.setViewportView(jListRemover);
 
         jLabel64.setText("Remover venda");
 
-        jButton42.setText("Salvar e sair");
+        jButtonEnviar.setText("Enviar");
+        jButtonEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EnviarButtonActionPerformed(evt);
+            }
+        });
+
+        jButtonBuscar.setText("Buscar");
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(110, Short.MAX_VALUE)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(110, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel64)
-                .addGap(156, 156, 156))
             .addGroup(layout.createSequentialGroup()
-                .addGap(143, 143, 143)
-                .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(109, 109, 109)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jButtonEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(162, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonBuscar)
+                    .addComponent(jLabel64))
+                .addGap(156, 156, 156))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel64)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonBuscar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton42)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addComponent(jButtonEnviar)
+                .addGap(24, 24, 24))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BuscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarButtonActionPerformed
+        preencherListaVendas();
+    }//GEN-LAST:event_BuscarButtonActionPerformed
+
+    private void EnviarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnviarButtonActionPerformed
+        try{
+            int selectedIndex = jListRemover.getSelectedIndex();
+            if (selectedIndex == -1) {
+                JOptionPane.showMessageDialog(this, "Selecione uma venda para remover.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            Venda vendaParaRemover = this.vendas.get(selectedIndex);
+            String idParaRemover = vendaParaRemover.getId();
+            
+
+            int confirm = JOptionPane.showConfirmDialog(this, 
+                    "Tem certeza que deseja remover essa venda: " + vendaParaRemover.getId() + "?", 
+                    "Confirmar Remoção", JOptionPane.YES_NO_OPTION);
+            
+            if (confirm == JOptionPane.YES_OPTION) {
+                
+
+                this.controller.removerVenda(idParaRemover); 
+                
+
+                preencherListaVendas();
+                JOptionPane.showMessageDialog(this, "Venda removido com sucesso!");
+            }
+            
+        } 
+        catch (IndexOutOfBoundsException e) {
+             JOptionPane.showMessageDialog(this, "Erro: Venda não encontrado na lista interna.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_EnviarButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton42;
+    private javax.swing.JButton jButtonBuscar;
+    private javax.swing.JButton jButtonEnviar;
     private javax.swing.JLabel jLabel64;
-    private javax.swing.JList<String> jList8;
+    private javax.swing.JList<String> jListRemover;
     private javax.swing.JScrollPane jScrollPane8;
     // End of variables declaration//GEN-END:variables
 }

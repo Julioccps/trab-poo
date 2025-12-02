@@ -25,7 +25,26 @@ public class TelaClienteCadastrar extends javax.swing.JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Clientes");
     }
-
+    
+    private boolean isNumero(String str) {
+        if (str == null || str.isEmpty()) {
+            return false;
+        }
+        try {
+            Long.parseLong(str); 
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+    
+    private void limparCampos() {
+       this.jTextFieldNome.setText("");
+       this.jTextFieldTelefone.setText("");
+       this.jTextFieldEmail.setText("");
+       this.jTextFieldRG.setText("");
+       this.jTextFieldCPF.setText("");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -139,19 +158,35 @@ public class TelaClienteCadastrar extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private void limparCampos() {
-       this.jTextFieldNome.setText("");
-       this.jTextFieldTelefone.setText("");
-       this.jTextFieldEmail.setText("");
-       this.jTextFieldRG.setText("");
-       this.jTextFieldCPF.setText("");
-    }
+
     private void EnviarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnviarButtonActionPerformed
         String nome = jTextFieldNome.getText();
         String tel = jTextFieldTelefone.getText();
         String email = jTextFieldEmail.getText();
         String rg = jTextFieldRG.getText();
         String cpf = jTextFieldCPF.getText();
+        
+        if (!isNumero(tel)) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                    "O campo Telefone deve conter apenas numeros.", 
+                    "Erro de Validacao", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return; 
+        }
+        if (!isNumero(rg)) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                    "O campo RG deve conter apenas numeros.", 
+                    "Erro de Validacao", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return; 
+        }
+        if (!isNumero(cpf)) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                    "O campo CPF deve conter apenas numeros.", 
+                    "Erro de Validacao", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return; 
+        }
         
         this.controller.cadastrarCliente(nome, tel, email, rg, cpf);
         this.limparCampos();

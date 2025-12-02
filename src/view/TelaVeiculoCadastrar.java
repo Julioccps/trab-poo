@@ -25,6 +25,28 @@ public class TelaVeiculoCadastrar extends javax.swing.JFrame {
         setTitle("Cadastrar Veiculo");
     }
     
+    private boolean isNumero(String str) {
+        if (str == null || str.isEmpty()) {
+            return false;
+        }
+        try {
+            Long.parseLong(str); 
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+    
+    private void limparCampos() {
+       this.jTextFieldNome.setText("");
+       this.jTextFieldCor.setText("");
+       this.jTextFieldMarchas.setText("");
+       this.jTextFieldPortas.setText("");
+       this.jTextFieldMarca.setText("");
+       this.jTextFieldAno.setText("");
+       this.jTextFieldID.setText("");
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -162,15 +184,6 @@ public class TelaVeiculoCadastrar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    private void limparCampos() {
-       this.jTextFieldNome.setText("");
-       this.jTextFieldCor.setText("");
-       this.jTextFieldMarchas.setText("");
-       this.jTextFieldPortas.setText("");
-       this.jTextFieldMarca.setText("");
-       this.jTextFieldAno.setText("");
-       this.jTextFieldID.setText("");
-    }
     private void EnviarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnviarButtonActionPerformed
         String nome = jTextFieldNome.getText();
         String cor = jTextFieldCor.getText();
@@ -179,6 +192,35 @@ public class TelaVeiculoCadastrar extends javax.swing.JFrame {
         String marca = jTextFieldMarca.getText();
         String ano = jTextFieldAno.getText();
         String id = jTextFieldID.getText();
+        
+        if (!isNumero(numMarchas)) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                    "O campo Numero de marchas deve conter apenas numeros.", 
+                    "Erro de Validacao", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return; 
+        }
+        if (!isNumero(numPortas)) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                    "O campo Numero de portas deve conter apenas numeros.", 
+                    "Erro de Validacao", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return; 
+        }
+        if (!isNumero(ano)) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                    "O campo Ano deve conter apenas numeros.", 
+                    "Erro de Validacao", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return; 
+        }
+        if (!isNumero(id)) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                    "O campo Identificacao deve conter apenas numeros.", 
+                    "Erro de Validacao", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return; 
+        }
         
         this.controller.cadastrarVeiculo(nome, cor, numMarchas, numPortas, marca, ano, id);
         this.limparCampos();

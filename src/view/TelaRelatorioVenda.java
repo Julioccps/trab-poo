@@ -41,7 +41,8 @@ public class TelaRelatorioVenda extends javax.swing.JFrame {
                             " | Valor: " + venda.getValor()+
                             " | Cliente: " + venda.getCliente()+
                             " | Numero de marchas: " + venda.getFuncionario()+ 
-                            " | Numero de portas: " + venda.getVeiculo();
+                            " | Numero de portas: " + venda.getVeiculo()+
+                            " | Identificador: " + venda.getId();
                 model.addElement(item);
             }
         }

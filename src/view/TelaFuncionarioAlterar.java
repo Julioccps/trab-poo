@@ -24,6 +24,17 @@ public class TelaFuncionarioAlterar extends javax.swing.JFrame {
         setTitle("Alterar Funcionario");
     }
     
+    private boolean isNumero(String str) {
+        if (str == null || str.isEmpty()) {
+            return false;
+        }
+        try {
+            Long.parseLong(str); 
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
     private void limparCampos() {
        this.jTextFieldNome.setText("");
        this.jTextFieldNumeroMatricula.setText("");
@@ -162,6 +173,28 @@ public class TelaFuncionarioAlterar extends javax.swing.JFrame {
         String desc = jTextFieldDescricaoQualificacao.getText();
         String carga = jTextFieldCarga.getText();
         String numBusca = jTextFieldNumeroMatriculaBusca.getText();
+        
+        if (!isNumero(num)) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                    "O campo Numero de matricula deve conter apenas numeros.", 
+                    "Erro de Validacao", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return; 
+        }
+        if (!isNumero(carga)) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                    "O campo Carga horaria deve conter apenas numeros.", 
+                    "Erro de Validacao", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return; 
+        }
+        if (!isNumero(numBusca)) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                    "O campo Numero de matricula para busca deve conter apenas numeros.", 
+                    "Erro de Validacao", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return; 
+        }
         
         this.controller.alterarFuncionario(nome, num, qual, desc, carga, numBusca);
         this.limparCampos();

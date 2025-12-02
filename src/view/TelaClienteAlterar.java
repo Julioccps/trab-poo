@@ -23,7 +23,18 @@ public class TelaClienteAlterar extends javax.swing.JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Alterar Cliente");
     }
-
+    
+    private boolean isNumero(String str) {
+        if (str == null || str.isEmpty()) {
+            return false;
+        }
+        try {
+            Long.parseLong(str); 
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -165,6 +176,27 @@ public class TelaClienteAlterar extends javax.swing.JFrame {
         String cpf = jTextFieldCPF.getText();
         String cpfBusca = jTextFieldCPFBusca.getText();
         
+        if (!isNumero(tel)) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                    "O campo Telefone deve conter apenas numeros.", 
+                    "Erro de Validacao", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return; 
+        }
+        if (!isNumero(rg)) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                    "O campo RG deve conter apenas numeros.", 
+                    "Erro de Validacao", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return; 
+        }
+        if (!isNumero(cpf)) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                    "O campo CPF deve conter apenas numeros.", 
+                    "Erro de Validacao", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return; 
+        }
         this.controller.alterarCliente(nome, tel, email, rg, cpf, cpfBusca);
         this.limparCampos();
     }//GEN-LAST:event_EnviarButtonActionPerformed

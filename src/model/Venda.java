@@ -6,30 +6,31 @@ public class Venda {
     private Cliente cliente;
     private Funcionario funcionario;
     private Veiculo veiculo;
+    private String id;
     
-    public Venda(String dat, String val, Cliente cli, Funcionario func, Veiculo vei){
-        super();
-    }
+
     
-    public void cadastrar(String data, String valor, Cliente cliente, Funcionario funcionario, Veiculo veiculo){
+    public Venda(String data, String valor, Cliente cliente, Funcionario funcionario, Veiculo veiculo, String id){
         this.data = data;
         this.valor = valor;
         this.cliente = cliente;
         this.funcionario = funcionario;
         this.veiculo = veiculo;
+        this.id = id;
     }
     public void consultar(){
         System.out.println("Data:" + data + ", Valor: " + valor + ", Cliente" + cliente.getNome() +
-                ", Funcionario: " + funcionario.getNome() + ", Veiculo: " + veiculo.getNome());        
+                ", Funcionario: " + funcionario.getNome() + ", Veiculo: " + veiculo.getNome() + ", identificador" + id);        
     }
     
     public void alterar(String nova_data, String novo_valor, 
-            Cliente novo_cliente, Funcionario novo_funcionario, Veiculo novo_veiculo){ // REFATORAR
+            Cliente novo_cliente, Funcionario novo_funcionario, Veiculo novo_veiculo, String novo_id){ // REFATORAR
         data = nova_data;
         valor = novo_valor;
         cliente = novo_cliente;
         funcionario = novo_funcionario;
         veiculo = novo_veiculo;
+        id = novo_id;
     }
     
     public void remover(){ // REFATORAR
@@ -76,5 +77,10 @@ public class Venda {
         this.veiculo = veiculo;
     }
     
-    
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
 }

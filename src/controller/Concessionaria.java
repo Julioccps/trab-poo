@@ -5,7 +5,6 @@ import model.Veiculo;
 import model.Funcionario;
 import model.Cliente;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Concessionaria {
 
@@ -116,7 +115,6 @@ public class Concessionaria {
                 System.out.println("Veiculo alterado com sucesso\n");
                 return;
             }
-
             System.out.println("Erro: O identificador do veiculo: " + id + " nao encontrado para alteracao.\n");
     }
     
@@ -131,8 +129,17 @@ public class Concessionaria {
         System.out.println("Erro: Veiculo com o identificador " + idBusca + " nao encontrado para remocao.\n");
     }
     
-    public void cadastrarVenda(String dat, String val, Cliente cli, Funcionario func, Veiculo vei) {
-        vendas.add(new Venda(dat, val, cli, func, vei));
+    private Venda buscarVendaPorId(String idBusca) {
+        for (Venda venda : this.vendas) {
+            if (venda.getId().equals(idBusca)) {
+                return venda;
+            }
+        }
+        return null;
+    }
+    
+    public void cadastrarVenda(String dat, String val, Cliente cli, Funcionario func, Veiculo vei, String id) {
+        vendas.add(new Venda(dat, val, cli, func, vei, id));
         System.out.println("Venda adicionado com sucesso\n");
     }
     
@@ -140,25 +147,25 @@ public class Concessionaria {
         return this.vendas;
     }
     
-    public void alterarVenda(int indiceVenda, String novaData, String novoValor, Cliente novoCli, Funcionario novoFunc, Veiculo novoVei) {
-        if (indiceVenda >= 0 && indiceVenda < this.vendas.size()) {
-            Venda vendaParaAlterar = this.vendas.get(indiceVenda);
-            vendaParaAlterar.alterar(novaData, novoValor, novoCli, novoFunc, novoVei); 
-            System.out.println("Venda alterada com sucesso\n");
-        }
-        else {
-            System.out.println("Erro: Indice de venda: " + indiceVenda + " invalido para alteracao.\n");
-        }
+    public void alterarVenda(String dat, String val, Cliente cli, Funcionario func, Veiculo vei, String id) {
+        Venda venda = buscarVendaPorId(id);
+            if (venda != null) {
+                venda.alterar(dat, val, cli, func, vei, id);
+                System.out.println("Venda alterado com sucesso\n");
+                return;
+            }
+            System.out.println("Erro: O identificador do venda: " + id + " nao encontrado para alteracao.\n");
     }
     
-    public void removerVenda(int indiceVenda) {
-        if (indiceVenda >= 0 && indiceVenda < this.vendas.size()) {
-            Venda vendaRemovida = this.vendas.remove(indiceVenda);
-            System.out.println("Venda do dia " + vendaRemovida.getData() + " removida com sucesso.\n");
-        } 
-        else {
-            System.out.println("Erro: Indice de venda: " + indiceVenda + " invalido para remocao.\n");
+    public void removerVenda(String idBusca) {
+        Venda vendaParaRemover = buscarVendaPorId(idBusca);
+
+        if (vendaParaRemover != null) {
+            this.vendas.remove(vendaParaRemover);
+            System.out.println("Venda com o identificador " + idBusca + " removido com sucesso.\n");
+            return;
         }
+        System.out.println("Erro: Venda com o identificador " + idBusca + " nao encontrado para remocao.\n");
     }
     
     public void clienteRelatorio() {

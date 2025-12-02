@@ -24,7 +24,26 @@ public class TelaFuncionarioCadastrar extends javax.swing.JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Funcionario");
     }
-
+    
+    private boolean isNumero(String str) {
+        if (str == null || str.isEmpty()) {
+            return false;
+        }
+        try {
+            Long.parseLong(str); 
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+    
+    private void limparCampos() {
+       this.jTextFieldNome.setText("");
+       this.jTextFieldNumero.setText("");
+       this.jTextFieldQualificacao.setText("");
+       this.jTextFieldDescricaoQualificacao.setText("");
+       this.jTextFieldCarga.setText("");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -135,19 +154,27 @@ public class TelaFuncionarioCadastrar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void limparCampos() {
-       this.jTextFieldNome.setText("");
-       this.jTextFieldNumero.setText("");
-       this.jTextFieldQualificacao.setText("");
-       this.jTextFieldDescricaoQualificacao.setText("");
-       this.jTextFieldCarga.setText("");
-    }
     private void EnviarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnviarButtonActionPerformed
         String nome = jTextFieldNome.getText();
         String num = jTextFieldNumero.getText();
         String qual = jTextFieldQualificacao.getText();
         String desc = jTextFieldDescricaoQualificacao.getText();
         String carga = jTextFieldCarga.getText();
+        
+        if (!isNumero(num)) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                    "O campo Numero de matricula deve conter apenas numeros.", 
+                    "Erro de Validacao", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return; 
+        }
+        if (!isNumero(carga)) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                    "O campo Carga horaria deve conter apenas numeros.", 
+                    "Erro de Validacao", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return; 
+        }
         
         this.controller.cadastrarFuncionario(nome, num, qual, desc, carga);
         this.limparCampos();
