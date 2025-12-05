@@ -21,7 +21,8 @@ public class Concessionaria {
     }
     
     public void cadastrarCliente(String nome, String tel, String email, String rg, String cpf){
-        //clientes.add(new Cliente(nome, tel, email, rg, cpf));
+        // TODO: Tornar CPF unique e NOT NULL
+        
         Cliente t = new Cliente(nome, tel, email, rg, cpf);
         em.getTransaction().begin();
         em.persist(t);
