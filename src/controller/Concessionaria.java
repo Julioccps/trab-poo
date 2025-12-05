@@ -1,20 +1,19 @@
 package controller;
 
-import model.Venda;
-import model.Veiculo;
-import model.Funcionario;
-import model.Cliente;
+import model.*;
 import java.util.ArrayList;
+import javax.persistence.*;
 
 public class Concessionaria {
-
     private final ArrayList<Cliente> clientes;
     private final ArrayList<Funcionario> funcionarios;
     private final ArrayList<Veiculo> veiculos;
     private final ArrayList<Venda> vendas;
-    
-    public Concessionaria() {
+    private EntityManager em;
+
+    public Concessionaria(EntityManager em) {
         super();
+        this.em = em;
         this.clientes = new ArrayList<>();
         this.funcionarios = new ArrayList<>();
         this.veiculos = new ArrayList<>();
@@ -22,33 +21,51 @@ public class Concessionaria {
     }
     
     public void cadastrarCliente(String nome, String tel, String email, String rg, String cpf){
-        clientes.add(new Cliente(nome, tel, email, rg, cpf));
+        //clientes.add(new Cliente(nome, tel, email, rg, cpf));
+        Cliente t = new Cliente(nome, tel, email, rg, cpf);
+        em.getTransaction().begin();
+        em.persist(t);
+        em.getTransaction().commit();
+        
         System.out.println("Cliente adicionado com sucesso\n");
     }
     
     public ArrayList<Cliente> consultarCliente(){
-        return this.clientes;
+        return new ArrayList<>(em.createQuery("SELECT c FROM Cliente c ", Cliente.class).getResultList());
     }
     
     public void alterarCliente(String nome, String tel, String email, String rg, String cpf, String cpfBusca){
-        for (Cliente cliente : this.clientes) {
-            if (cliente.getCpf().equals(cpfBusca)) {
-                cliente.alterar(nome, tel, email, rg, cpf); // Usa o CPF para a busca do cliente, talvez mudar a logica disso.
-                System.out.println("Cliente alterado com sucesso\n");
-                return;
+        try {
+            em.getTransaction().begin();
+        
+            Cliente t =em.createQuery("SELECT c FROM Cliente c WHERE c.cpf = :n", Cliente.class)
+                    .setParameter("n", cpfBusca)
+                    .getSingleResult();
+            t.alterar(nome, tel, email, rg, cpf);
+            
+            em.getTransaction().commit();
+        } catch(Exception e){
+            if (em.getTransaction().isActive()){
+               em.getTransaction().rollback();
             }
+            System.out.println("Cliente com CPF informado nao encontrado\n");
         }
-        System.out.println("\nErro: Cliente com CPF " + cpfBusca + " nao encontrado para alteracao.\n");
     }
     public void removerCliente(String cpfBusca) {
-        for (int i = 0; i < this.clientes.size(); i++) {
-            Cliente cliente = this.clientes.get(i);
-            if (cliente.getCpf().equals(cpfBusca)) {
-                this.clientes.remove(i);
-                System.out.println("Cliente com CPF " + cpfBusca + " removido com sucesso.\n");
-                return;
+         try {
+            em.getTransaction().begin();
+        
+            Cliente t =em.createQuery("SELECT c FROM Cliente c WHERE c.cpf = :n", Cliente.class)
+                    .setParameter("n", cpfBusca)
+                    .getSingleResult();
+            em.remove(t);
+            
+            em.getTransaction().commit();
+        } catch(Exception e){
+            if (em.getTransaction().isActive()){
+               em.getTransaction().rollback();
             }
-            System.out.println("Erro: Cliente com CPF " + cpfBusca + " nao encontrado para remocao.\n");
+            System.out.println("Cliente com CPF informado nao encontrado\n");
         }
     }
     

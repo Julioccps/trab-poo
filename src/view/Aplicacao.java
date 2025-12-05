@@ -5,6 +5,7 @@
 package view;
 
 import controller.Concessionaria;
+import javax.persistence.*;
 
 
 /**
@@ -19,14 +20,17 @@ public class Aplicacao extends javax.swing.JFrame {
     private final TelaVeiculo telaveiculo;
     private final TelaVenda telavenda;
     private final TelaRelatorio telarelatorio;
-
+    private static EntityManagerFactory emf;
+    private static EntityManager em;
 
     /**
      * Creates new form Interface
      */
     public Aplicacao() {
         initComponents();
-        this.concessionaria = new Concessionaria();
+        this.emf = Persistence.createEntityManagerFactory("trabalhoPOOPU");
+        this.em = emf.createEntityManager();
+        this.concessionaria = new Concessionaria(em);
         this.telacliente = new TelaCliente(this.concessionaria);
         this.telafuncionario = new TelaFuncionario(this.concessionaria);
         this.telaveiculo = new TelaVeiculo(this.concessionaria);
@@ -201,6 +205,8 @@ public class Aplicacao extends javax.swing.JFrame {
                 new Aplicacao().setVisible(true);
             }
         });
+        em.close();
+        emf.close();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
