@@ -27,14 +27,14 @@ public class Concessionaria {
         return new ArrayList<>(em.createQuery("SELECT c FROM Cliente c ", Cliente.class).getResultList());
     }
     
-    public void alterarCliente(String nome, String tel, String email, String rg, String cpf, String cpfBusca){
+    public void alterarCliente(String nome, String tel, String email, String rg, String cpfBusca){
         try {
             em.getTransaction().begin();
         
             Cliente t =em.createQuery("SELECT c FROM Cliente c WHERE c.cpf = :n", Cliente.class)
                     .setParameter("n", cpfBusca)
                     .getSingleResult();
-            t.alterar(nome, tel, email, rg, cpf);
+            t.alterar(nome, tel, email, rg, t.getCpf());
             
             em.getTransaction().commit();
         } catch(Exception e){
@@ -75,14 +75,14 @@ public class Concessionaria {
         return new ArrayList<>(em.createQuery("SELECT f FROM Funcionario f ", Funcionario.class).getResultList());
     }
     
-    public void alterarFuncionario(String nome, String mat, String qual, String desc, String carga, String matBusca) {
+    public void alterarFuncionario(String nome, String qual, String desc, String carga, String matBusca) {
         try {
             em.getTransaction().begin();
         
             Funcionario t = em.createQuery("SELECT f FROM Funcionario f WHERE f.num_matricula = :n", Funcionario.class)
                     .setParameter("n", matBusca)
                     .getSingleResult();
-            t.alterar(nome, mat, qual, desc, carga);
+            t.alterar(nome,t.getNum_matricula(), qual, desc, carga);
             
             em.getTransaction().commit();
         } catch(Exception e){
