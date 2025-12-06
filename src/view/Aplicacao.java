@@ -20,8 +20,8 @@ public class Aplicacao extends javax.swing.JFrame {
     private final TelaVeiculo telaveiculo;
     private final TelaVenda telavenda;
     private final TelaRelatorio telarelatorio;
-    private static EntityManagerFactory emf;
-    private static EntityManager em;
+    private EntityManagerFactory emf;
+    private EntityManager em;
 
     /**
      * Creates new form Interface
@@ -168,6 +168,12 @@ public class Aplicacao extends javax.swing.JFrame {
 
     private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
         System.out.println("Encerrando o programa!");
+        if (em != null && em.isOpen()) {
+            em.close();
+        }
+        if (emf != null && emf.isOpen()) {
+            emf.close();
+        }
         System.exit(0);
     }//GEN-LAST:event_ExitButtonActionPerformed
 
@@ -205,8 +211,6 @@ public class Aplicacao extends javax.swing.JFrame {
                 new Aplicacao().setVisible(true);
             }
         });
-        em.close();
-        emf.close();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,5 +1,8 @@
 package model;
 
+import javax.persistence.*;
+
+@Entity
 public class Veiculo implements Nomeavel{ 
     private String nome;
     private String cor;
@@ -7,8 +10,11 @@ public class Veiculo implements Nomeavel{
     private String num_portas;
     private String marca;
     private String ano;
+    @Id
     private String id;
     
+    public Veiculo() {}
+
     public Veiculo(String nome, String cor, String num_marchas, String num_portas, String marca, String ano, String id){
         this.nome = nome;
         this.cor = cor;

@@ -1,11 +1,19 @@
 package model;
 
+import javax.persistence.*;
+
+@Entity
 public class Cliente extends Pessoa{
     private String telefone;
     private String email;
     private String rg;
+    @Id
     private String cpf;
     
+    public Cliente() {
+        super("");
+    }
+
     public Cliente(String nome, String telefone, String email, String rg, String cpf){
         super(nome);
         this.telefone = telefone;

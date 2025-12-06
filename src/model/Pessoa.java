@@ -1,8 +1,13 @@
 package model;
 
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public class Pessoa implements Nomeavel{ 
     protected String nome;
     
+    public Pessoa() {}
+
     public Pessoa(String nome){
         this.nome = nome;
         

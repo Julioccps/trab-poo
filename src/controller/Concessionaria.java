@@ -5,19 +5,11 @@ import java.util.ArrayList;
 import javax.persistence.*;
 
 public class Concessionaria {
-    private final ArrayList<Cliente> clientes;
-    private final ArrayList<Funcionario> funcionarios;
-    private final ArrayList<Veiculo> veiculos;
-    private final ArrayList<Venda> vendas;
     private EntityManager em;
 
     public Concessionaria(EntityManager em) {
         super();
         this.em = em;
-        this.clientes = new ArrayList<>();
-        this.funcionarios = new ArrayList<>();
-        this.veiculos = new ArrayList<>();
-        this.vendas = new ArrayList<>();
     }
     
     public void cadastrarCliente(String nome, String tel, String email, String rg, String cpf){
@@ -71,142 +63,177 @@ public class Concessionaria {
     }
     
     public void cadastrarFuncionario(String nome, String mat, String qual, String desc, String carga) {
-        funcionarios.add(new Funcionario(nome, mat, qual, desc, carga));
+        Funcionario t = new Funcionario(nome, mat, qual, desc, carga);
+        em.getTransaction().begin();
+        em.persist(t);
+        em.getTransaction().commit();
+        
         System.out.println("Funcionario adicionado com sucesso\n");
     }
     
     public ArrayList<Funcionario> consultarFuncionario() {
-        return this.funcionarios;
+        return new ArrayList<>(em.createQuery("SELECT f FROM Funcionario f ", Funcionario.class).getResultList());
     }
     
     public void alterarFuncionario(String nome, String mat, String qual, String desc, String carga, String matBusca) {
-        for (Funcionario funcionario : this.funcionarios) {
-            if (funcionario.getNum_matricula().equals(matBusca)) {
-                funcionario.alterar(nome, mat, qual, desc, carga);
-                System.out.println("Funcionario alterado com sucesso\n");
-                return;
+        try {
+            em.getTransaction().begin();
+        
+            Funcionario t = em.createQuery("SELECT f FROM Funcionario f WHERE f.num_matricula = :n", Funcionario.class)
+                    .setParameter("n", matBusca)
+                    .getSingleResult();
+            t.alterar(nome, mat, qual, desc, carga);
+            
+            em.getTransaction().commit();
+        } catch(Exception e){
+            if (em.getTransaction().isActive()){
+               em.getTransaction().rollback();
             }
+            System.out.println("Funcionario com numero de matricula informado nao encontrado\n");
         }
-        System.out.println("\nErro: Numero de matricula do funcionario " + matBusca + " nao encontrado para alteracao.\n");
     }
     
     public void removerFuncionario(String matBusca) {
-        for (int i = 0; i < this.funcionarios.size(); i++) {
-            Funcionario funcionario = this.funcionarios.get(i);
-            if (funcionario.getNum_matricula().equals(matBusca)) {
-                this.funcionarios.remove(i);
-                System.out.println("Funcionario com o numero de matricula " + matBusca + " removido com sucesso.\n");
-                return;
+        try {
+            em.getTransaction().begin();
+        
+            Funcionario t = em.createQuery("SELECT f FROM Funcionario f WHERE f.num_matricula = :n", Funcionario.class)
+                    .setParameter("n", matBusca)
+                    .getSingleResult();
+            em.remove(t);
+            
+            em.getTransaction().commit();
+        } catch(Exception e){
+            if (em.getTransaction().isActive()){
+               em.getTransaction().rollback();
             }
-            System.out.println("Erro: Funcionario com o numero de matricula " + matBusca + " nao encontrado para remocao.\n");
+            System.out.println("Funcionario com numero de matricula informado nao encontrado\n");
         }
-    }
-    
-    private Veiculo buscarVeiculoPorId(String idBusca) {
-        for (Veiculo veiculo : this.veiculos) {
-            if (veiculo.getId().equals(idBusca)) {
-                return veiculo;
-            }
-        }
-        return null;
     }
     
     public void cadastrarVeiculo(String nome, String cor, String numMarchas, String numPortas, String marca, String ano, String id) {
-        if (buscarVeiculoPorId(id) != null) {
-            System.out.println("Erro: Veiculo com o identificador " + id + " ja cadastrado.\n");
-            return;
-        }   
-        else{
-            veiculos.add(new Veiculo(nome, cor, numMarchas, numPortas, marca, ano, id));
-            System.out.println("Veiculo adicionado com sucesso\n");
-        }
+        Veiculo t = new Veiculo(nome, cor, numMarchas, numPortas, marca, ano, id);
+        em.getTransaction().begin();
+        em.persist(t);
+        em.getTransaction().commit();
+        
+        System.out.println("Veiculo adicionado com sucesso\n");
     }
     
     public ArrayList<Veiculo> consultarVeiculo() {
-        return this.veiculos;
+        return new ArrayList<>(em.createQuery("SELECT v FROM Veiculo v ", Veiculo.class).getResultList());
     }
     
     public void alterarVeiculo(String nome, String cor, String numMarchas, String numPortas, String marca, String ano, String id) {
-        Veiculo veiculo = buscarVeiculoPorId(id);
-            if (veiculo != null) {
-                veiculo.alterar(nome, cor, numMarchas, numPortas, marca, ano, id);
-                System.out.println("Veiculo alterado com sucesso\n");
-                return;
+        try {
+            em.getTransaction().begin();
+        
+            Veiculo t = em.createQuery("SELECT v FROM Veiculo v WHERE v.id = :n", Veiculo.class)
+                    .setParameter("n", id)
+                    .getSingleResult();
+            t.alterar(nome, cor, numMarchas, numPortas, marca, ano, id);
+            
+            em.getTransaction().commit();
+        } catch(Exception e){
+            if (em.getTransaction().isActive()){
+               em.getTransaction().rollback();
             }
-            System.out.println("Erro: O identificador do veiculo: " + id + " nao encontrado para alteracao.\n");
+            System.out.println("Veiculo com identificador informado nao encontrado\n");
+        }
     }
     
     public void removerVeiculo(String idBusca) {
-        Veiculo veiculoParaRemover = buscarVeiculoPorId(idBusca);
-
-        if (veiculoParaRemover != null) {
-            this.veiculos.remove(veiculoParaRemover);
-            System.out.println("Veiculo com o identificador " + idBusca + " removido com sucesso.\n");
-            return;
-        }
-        System.out.println("Erro: Veiculo com o identificador " + idBusca + " nao encontrado para remocao.\n");
-    }
-    
-    private Venda buscarVendaPorId(String idBusca) {
-        for (Venda venda : this.vendas) {
-            if (venda.getId().equals(idBusca)) {
-                return venda;
+        try {
+            em.getTransaction().begin();
+        
+            Veiculo t = em.createQuery("SELECT v FROM Veiculo v WHERE v.id = :n", Veiculo.class)
+                    .setParameter("n", idBusca)
+                    .getSingleResult();
+            em.remove(t);
+            
+            em.getTransaction().commit();
+        } catch(Exception e){
+            if (em.getTransaction().isActive()){
+               em.getTransaction().rollback();
             }
+            System.out.println("Veiculo com identificador informado nao encontrado\n");
         }
-        return null;
     }
     
     public void cadastrarVenda(String dat, String val, Cliente cli, Funcionario func, Veiculo vei, String id) {
-        vendas.add(new Venda(dat, val, cli, func, vei, id));
+        Venda t = new Venda(dat, val, cli, func, vei, id);
+        em.getTransaction().begin();
+        em.persist(t);
+        em.getTransaction().commit();
+        
         System.out.println("Venda adicionado com sucesso\n");
     }
     
     public ArrayList<Venda> consultarVenda() {
-        return this.vendas;
+        return new ArrayList<>(em.createQuery("SELECT v FROM Venda v ", Venda.class).getResultList());
     }
     
     public void alterarVenda(String dat, String val, Cliente cli, Funcionario func, Veiculo vei, String id) {
-        Venda venda = buscarVendaPorId(id);
-            if (venda != null) {
-                venda.alterar(dat, val, cli, func, vei, id);
-                System.out.println("Venda alterado com sucesso\n");
-                return;
+        try {
+            em.getTransaction().begin();
+        
+            Venda t = em.createQuery("SELECT v FROM Venda v WHERE v.id = :n", Venda.class)
+                    .setParameter("n", id)
+                    .getSingleResult();
+            t.alterar(dat, val, cli, func, vei, id);
+            
+            em.getTransaction().commit();
+        } catch(Exception e){
+            if (em.getTransaction().isActive()){
+               em.getTransaction().rollback();
             }
-            System.out.println("Erro: O identificador do venda: " + id + " nao encontrado para alteracao.\n");
+            System.out.println("Venda com identificador informado nao encontrado\n");
+        }
     }
     
     public void removerVenda(String idBusca) {
-        Venda vendaParaRemover = buscarVendaPorId(idBusca);
-
-        if (vendaParaRemover != null) {
-            this.vendas.remove(vendaParaRemover);
-            System.out.println("Venda com o identificador " + idBusca + " removido com sucesso.\n");
-            return;
+        try {
+            em.getTransaction().begin();
+        
+            Venda t = em.createQuery("SELECT v FROM Venda v WHERE v.id = :n", Venda.class)
+                    .setParameter("n", idBusca)
+                    .getSingleResult();
+            em.remove(t);
+            
+            em.getTransaction().commit();
+        } catch(Exception e){
+            if (em.getTransaction().isActive()){
+               em.getTransaction().rollback();
+            }
+            System.out.println("Venda com identificador informado nao encontrado\n");
         }
-        System.out.println("Erro: Venda com o identificador " + idBusca + " nao encontrado para remocao.\n");
     }
     
     public void clienteRelatorio() {
-        for (int i = 0; i < clientes.size(); i++){
-            clientes.get(i).consultar();
+        ArrayList<Cliente> clientes = consultarCliente();
+        for (Cliente cliente : clientes){
+            cliente.consultar();
         }
     }
     
     public void funcionarioRelatorio() {
-        for (int i = 0; i < funcionarios.size(); i++){
-            funcionarios.get(i).consultar();
+        ArrayList<Funcionario> funcionarios = consultarFuncionario();
+        for (Funcionario funcionario : funcionarios){
+            funcionario.consultar();
         }
     }
     
     public void veiculoRelatorio() {
-        for (int i = 0; i < veiculos.size(); i++){
-            vendas.get(i).consultar();
+        ArrayList<Veiculo> veiculos = consultarVeiculo();
+        for (Veiculo veiculo : veiculos){
+            veiculo.consultar();
         }
     }
     
     public void vendaRelatorio() {
-        for (int i = 0; i < vendas.size(); i++){
-            vendas.get(i).consultar();
+        ArrayList<Venda> vendas = consultarVenda();
+        for (Venda venda : vendas){
+            venda.consultar();
         }
     }
 }

@@ -1,11 +1,19 @@
 package model;
 
+import javax.persistence.*;
+
+@Entity
 public class Funcionario extends Pessoa{
+    @Id
     private String num_matricula;
     private String qualificacao;
     private String descricao_qualificacao;
     private String carga_horaria_semanal;
     
+    public Funcionario() {
+        super("");
+    }
+
     public Funcionario(String nome, String num_matricula, String qualificacao,
             String descricao_qualificacao, String carga_horaria_semanal){
         super(nome);

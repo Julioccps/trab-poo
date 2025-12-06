@@ -1,15 +1,22 @@
 package model;
 
+import javax.persistence.*;
+
+@Entity
 public class Venda {
     private String data;
     private String valor;
+    @ManyToOne
     private Cliente cliente;
+    @ManyToOne
     private Funcionario funcionario;
+    @ManyToOne
     private Veiculo veiculo;
+    @Id
     private String id;
     
+    public Venda() {}
 
-    
     public Venda(String data, String valor, Cliente cliente, Funcionario funcionario, Veiculo veiculo, String id){
         this.data = data;
         this.valor = valor;
