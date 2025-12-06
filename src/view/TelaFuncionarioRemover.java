@@ -147,7 +147,7 @@ public class TelaFuncionarioRemover extends javax.swing.JFrame {
             if (confirm == JOptionPane.YES_OPTION) {
                 
 
-                this.controller.removerCliente(numMatParaRemover); 
+                this.controller.removerFuncionario(numMatParaRemover); 
                 
 
                 preencherListaFuncionarios();
